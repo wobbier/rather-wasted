@@ -97,6 +97,11 @@ public class PlayerController : MonoBehaviour
 
     private void OrbitCam(float xAxis, float yAxis, float step)
     {
+        if (Physics.Raycast(ChildCamera.transform.position, -GOTransform.up, 1.0f))
+        {
+            return;
+        }
+
         Vector3 curPos = GOTransform.position;
         Vector3 oldCamPos = ChildCamera.transform.position;
 
