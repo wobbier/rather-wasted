@@ -437,5 +437,7 @@ MonoBehaviour:
   ChildCamera: {fileID: 282840813}
   MoveSpeed: 4
   RotateSpeed: 1
-  OrbitSpeed: 4
+  OrbitSpeed: 6
+  OrbitReturnSpeed: 2
   CameraDistance: 5
+  ControllerSensitivity: 15

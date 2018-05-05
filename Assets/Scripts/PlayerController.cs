@@ -11,11 +11,24 @@ public class PlayerController : MonoBehaviour
     public Camera ChildCamera;
     #endregion
 
-    #region Public Exposed Movement Members
+    #region Private Delegate Declarations
+    public delegate void MovementStepDelegate(float val);
+    public delegate void MovementRotateDelegate(float val);
+    #endregion
+
+    #region Public Events
+    public event MovementStepDelegate OnMovementStep;
+    public event MovementRotateDelegate OnMovementRotate;
+    #endregion
+
+    #region Public Movement Members
     public float MoveSpeed = 1.0f;
     public float RotateSpeed = 1.0f;
     public float OrbitSpeed = 1.0f;
+    public float OrbitReturnSpeed = 1.0f;
     public float CameraDistance = 1.0f;
+
+    public float ControllerSensitivity = 1.0f;
     #endregion
 
     #region Private Structures
@@ -24,65 +37,92 @@ public class PlayerController : MonoBehaviour
         public float MoveStep;
         public float RotStep;
         public float OrbitStep;
+        public float OrbitReturnStep;
     }
     #endregion
 
     #region Private Members
-    float lastX;
-    float lastY;
+    private Transform GOTransform;
     #endregion
 
     // Use this for initialization
     void Start()
     {
-        ChildCamera.transform.parent = gameObject.transform;
+        GOTransform = gameObject.transform;
+        ChildCamera.transform.parent = GOTransform;
     }
 
     // Update is called once per frame
     void Update()
     {
         StepValues stepValues;
-        stepValues.MoveStep     = MoveSpeed * Time.deltaTime;
-        stepValues.RotStep      = RotateSpeed * Time.deltaTime;
-        stepValues.OrbitStep    = OrbitSpeed * Time.deltaTime;
+        stepValues.MoveStep              = MoveSpeed * Time.deltaTime;
+        stepValues.RotStep               = RotateSpeed * Time.deltaTime;
+        stepValues.OrbitStep             = OrbitSpeed * Time.deltaTime;
+        stepValues.OrbitReturnStep       = OrbitReturnSpeed * Time.deltaTime;
 
         //DoKeyboardInput(stepValues);
         DoControllerInput(stepValues);
     }
+    
+    private Vector3 StepMovement(Vector3 dir, float step)
+    {
+        return dir * step;
+    }
 
-    bool test = false;
+    private Vector3 StepRotation(Vector3 dir, float step)
+    {
+        Vector3 curPos = gameObject.transform.position;
+        Vector3 desiredPos = curPos + gameObject.transform.right;
+        Vector3 targetPos = desiredPos - curPos;
+
+        Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, step, 0.25f).normalized;
+        return newDir;
+    }
+
+    private void OrbitCam(float xAxis, float yAxis, float step)
+    {
+        Vector3 curPos = GOTransform.position;
+
+        ChildCamera.transform.RotateAround(curPos, Vector3.right, step * yAxis);
+        ChildCamera.transform.RotateAround(curPos, Vector3.up, step * xAxis);
+        ChildCamera.transform.LookAt(curPos);
+    }
+
+    private void TryOrbitReturn(float step)
+    {
+        Vector3 cameraReturnPos = gameObject.transform.position + (gameObject.transform.forward * -CameraDistance);
+        Vector3 dist = cameraReturnPos - ChildCamera.transform.position;
+        if (dist.sqrMagnitude >= Vector3.kEpsilon * Vector3.kEpsilon)
+        {
+            ChildCamera.transform.position = Vector3.Slerp(ChildCamera.transform.position, cameraReturnPos, step);
+            ChildCamera.transform.LookAt(GOTransform.position);
+        }
+    }
+
     private void DoKeyboardInput(StepValues stepValues)
     {
         // Keyboard
         if (Input.GetKey(KeyCode.W))
         {
-            gameObject.transform.position += gameObject.transform.forward * stepValues.MoveStep;
+            Vector3 steppedMovement = StepMovement(GOTransform.forward, stepValues.MoveStep);
+            GOTransform.position += steppedMovement;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            gameObject.transform.position += -gameObject.transform.forward * stepValues.MoveStep;
+            Vector3 steppedMovement = StepMovement(-GOTransform.forward, stepValues.MoveStep);
+            GOTransform.position += steppedMovement;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Vector3 curPos = gameObject.transform.position;
-            Vector3 desiredPos = curPos + gameObject.transform.right;
-            Vector3 targetPos = desiredPos - curPos;
-
-            // rotation
-            Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, stepValues.RotStep, 0.25f).normalized;
-            gameObject.transform.rotation = Quaternion.LookRotation(newDir);
+            Vector3 steppedRotation = StepRotation(GOTransform.right, stepValues.RotStep);
+            gameObject.transform.rotation = Quaternion.LookRotation(steppedRotation);
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            // rotation
-            Vector3 curPos = gameObject.transform.position;
-            Vector3 desiredPos = curPos + -gameObject.transform.right;
-            Vector3 targetPos = desiredPos - curPos;
-
-            // rotation
-            Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, stepValues.RotStep, 0.25f).normalized;
-            gameObject.transform.rotation = Quaternion.LookRotation(newDir);
+            Vector3 steppedRotation = StepRotation(-GOTransform.right, stepValues.RotStep);
+            gameObject.transform.rotation = Quaternion.LookRotation(steppedRotation);
         }
         
         // Mouse
@@ -93,21 +133,12 @@ public class PlayerController : MonoBehaviour
             
             if (xAxis != 0 || yAxis != 0)
             {
-                Vector3 curPos = gameObject.transform.position;
-
-                ChildCamera.transform.RotateAround(curPos, Vector3.right, stepValues.OrbitStep * yAxis * 10);
-                ChildCamera.transform.RotateAround(curPos, Vector3.up, stepValues.OrbitStep * xAxis * 10);
-                ChildCamera.transform.LookAt(curPos);
+                OrbitCam(xAxis, yAxis, stepValues.OrbitStep);
             }
         }
         else
         {
-            Vector3 cameraReturnPos = gameObject.transform.position + (gameObject.transform.forward * -CameraDistance);
-            Vector3 dist = cameraReturnPos - ChildCamera.transform.position;
-            if (dist.sqrMagnitude >= Vector3.kEpsilon * Vector3.kEpsilon)
-            {
-                ChildCamera.transform.position = Vector3.Slerp(ChildCamera.transform.position, cameraReturnPos, stepValues.OrbitStep);
-            }
+            TryOrbitReturn(stepValues.OrbitReturnStep);
         }
     }
 
@@ -124,34 +155,24 @@ public class PlayerController : MonoBehaviour
 
         // translation
         {
-            gameObject.transform.position += gameObject.transform.forward * stepValues.MoveStep * yAxisLeft;
+            Vector3 steppedPosition = StepMovement(GOTransform.forward, stepValues.MoveStep * yAxisLeft);
+            GOTransform.position += steppedPosition;
         }
 
         // rotation
         {
-            Vector3 desiredPos = curPos + gameObject.transform.right;
-            Vector3 targetPos = desiredPos - curPos;
-
-            Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, stepValues.RotStep * xAxisLeft, 0.25f).normalized;
-            gameObject.transform.rotation = Quaternion.LookRotation(newDir);
+            Vector3 steppedRotation = StepRotation(gameObject.transform.forward, stepValues.RotStep * xAxisLeft);
+            gameObject.transform.rotation = Quaternion.LookRotation(steppedRotation);
         }
 
         // orbit
         if (xAxisRight != 0.0f || yAxisRight != 0.0f)
         {
-            ChildCamera.transform.RotateAround(curPos, Vector3.right, stepValues.OrbitStep * yAxisRight * 10);
-            ChildCamera.transform.RotateAround(curPos, Vector3.up, stepValues.OrbitStep * xAxisRight * 10);
-            ChildCamera.transform.LookAt(curPos);
+            OrbitCam(xAxisRight, yAxisRight, stepValues.OrbitStep * ControllerSensitivity);
         }
         else
         {
-            Vector3 cameraReturnPos = gameObject.transform.position + (gameObject.transform.forward * -CameraDistance);
-            Vector3 dist = cameraReturnPos - ChildCamera.transform.position;
-            if (dist.sqrMagnitude >= Vector3.kEpsilon * Vector3.kEpsilon)
-            {
-                ChildCamera.transform.position = Vector3.Slerp(ChildCamera.transform.position, cameraReturnPos, stepValues.OrbitStep);
-                ChildCamera.transform.LookAt(curPos);
-            }
+            TryOrbitReturn(stepValues.OrbitReturnStep);
         }
     }
 }
