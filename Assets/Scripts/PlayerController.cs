@@ -14,6 +14,16 @@ public class PlayerController : MonoBehaviour
     #region Public Exposed Movement Members
     public float MoveSpeed = 1.0f;
     public float RotateSpeed = 1.0f;
+    public float OrbitSpeed = 1.0f;
+    #endregion
+
+    #region Private Structures
+    struct StepValues
+    {
+        public float MoveStep;
+        public float RotStep;
+        public float OrbitStep;
+    }
     #endregion
 
     // Use this for initialization
@@ -25,22 +35,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float moveStep = MoveSpeed * Time.deltaTime;
-        float rotStep = RotateSpeed * Time.deltaTime;
+        StepValues stepValues;
+        stepValues.MoveStep     = MoveSpeed * Time.deltaTime;
+        stepValues.RotStep      = RotateSpeed * Time.deltaTime;
+        stepValues.OrbitStep    = OrbitSpeed * Time.deltaTime;
 
-        DoKeyboardInput(moveStep, rotStep);
-        DoControllerInput(moveStep, rotStep);
+        DoKeyboardInput(stepValues);
+        DoControllerInput(stepValues);
     }
 
-    private void DoKeyboardInput(float moveStep, float rotStep)
+    private void DoKeyboardInput(StepValues stepValues)
     {
+        // Keyboard
         if (Input.GetKey(KeyCode.W))
         {
-            gameObject.transform.position += gameObject.transform.forward * MoveSpeed * Time.deltaTime;
+            gameObject.transform.position += gameObject.transform.forward * stepValues.MoveStep;
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            gameObject.transform.position += -gameObject.transform.forward * MoveSpeed * Time.deltaTime;
+            gameObject.transform.position += -gameObject.transform.forward * stepValues.MoveStep;
         }
 
         if (Input.GetKey(KeyCode.D))
@@ -50,7 +63,7 @@ public class PlayerController : MonoBehaviour
             Vector3 targetPos = desiredPos - curPos;
 
             // rotation
-            Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, RotateSpeed * Time.deltaTime, 0.25f).normalized;
+            Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, stepValues.RotStep, 0.25f).normalized;
             gameObject.transform.rotation = Quaternion.LookRotation(newDir);
         }
         else if (Input.GetKey(KeyCode.A))
@@ -61,29 +74,61 @@ public class PlayerController : MonoBehaviour
             Vector3 targetPos = desiredPos - curPos;
 
             // rotation
-            Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, RotateSpeed * Time.deltaTime, 0.25f).normalized;
+            Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, stepValues.RotStep, 0.25f).normalized;
             gameObject.transform.rotation = Quaternion.LookRotation(newDir);
+        }
+
+        // Mouse
+        if (Input.GetMouseButton(1))
+        {
+            float xAxis = Input.GetAxis("MouseX");
+            float yAxis = Input.GetAxis("MouseY");
+
+            if (xAxis != 0 || yAxis != 0)
+            {
+                Vector3 curPos = gameObject.transform.position;
+
+                ChildCamera.transform.RotateAround(curPos, Vector3.right, stepValues.OrbitStep * yAxis * 10);
+                ChildCamera.transform.RotateAround(curPos, Vector3.up, stepValues.OrbitStep * xAxis * 10);
+                ChildCamera.transform.LookAt(curPos);
+            }
+        }
+        else
+        {
+
         }
     }
 
-    private void DoControllerInput(float moveStep, float rotStep)
+    private void DoControllerInput(StepValues stepValues)
     {
-        float yAxis = Input.GetAxis("Vertical");
-        float xAxis = Input.GetAxis("Horizontal");
+        // Left stick
+        float yAxisLeft = Input.GetAxis("VerticalLeft");
+        float xAxisLeft = Input.GetAxis("HorizontalLeft");
+        // Right stick
+        float yAxisRight = Input.GetAxis("VerticalRight");
+        float xAxisRight = Input.GetAxis("HorizontalRight");
+
+        Vector3 curPos = gameObject.transform.position;
 
         // translation
         {
-            gameObject.transform.position += gameObject.transform.forward * moveStep * yAxis;
+            gameObject.transform.position += gameObject.transform.forward * stepValues.MoveStep * yAxisLeft;
         }
 
         // rotation
         {
-            Vector3 curPos = gameObject.transform.position;
             Vector3 desiredPos = curPos + gameObject.transform.right;
             Vector3 targetPos = desiredPos - curPos;
 
-            Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, rotStep * xAxis, 0.25f).normalized;
+            Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, stepValues.RotStep * xAxisLeft, 0.25f).normalized;
             gameObject.transform.rotation = Quaternion.LookRotation(newDir);
+        }
+
+        // orbit
+        {
+            ChildCamera.transform.RotateAround(curPos, Vector3.right, stepValues.OrbitStep * yAxisRight * 10);
+            ChildCamera.transform.RotateAround(curPos, Vector3.up, stepValues.OrbitStep * xAxisRight * 10);
+            ChildCamera.transform.LookAt(curPos);
         }
     }
 }
