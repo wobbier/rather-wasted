@@ -28,10 +28,10 @@ public class PlayerController : MonoBehaviour
         float moveStep = MoveSpeed * Time.deltaTime;
         float rotStep = RotateSpeed * Time.deltaTime;
 
-        DoInput();
+        DoInput(moveStep, rotStep);
     }
 
-    private void DoInput()
+    private void DoInput(float moveStep, float rotStep)
     {
         if (Input.GetKey(KeyCode.W))
         {
