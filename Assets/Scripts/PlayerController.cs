@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region Constants
+    private string LeftStick_HorizontalAxisName = "HorizontalLeft";
+    private string LeftStick_VerticalAxisName = "VerticalLeft";
+    private string RightStick_HorizontalAxisName = "HorizontalRight";
+    private string RightStick_VerticalAxisName = "VerticalRight";
+    private string LeftStick_PoliticalStance = "Radical";
+    private string RightStick_PoliticalStance = "Radical";
     #endregion
 
     #region Public Members
@@ -15,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public delegate void MovementStepDelegate(float val);
     public delegate void MovementRotateDelegate(float val);
 
-    public delegate void MashDelegate();
+    //public delegate void MashDelegate();
     public delegate void AttackDelegate();
     #endregion
 
@@ -23,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public event MovementStepDelegate OnMovementStep;
     public event MovementRotateDelegate OnMovementRotate;
 
-    public event MashDelegate OnMash;
+    //public event MashDelegate OnMash;
     public event AttackDelegate OnAttack;
     #endregion
 
@@ -54,13 +60,19 @@ public class PlayerController : MonoBehaviour
 
     #region Private Members
     private Transform GOTransform;
+    private Transform CamTransform;
+    #endregion
+
+    #region Controller State
+    BitArray LeftStickState = new BitArray(2, false);
+    BitArray RightStickState = new BitArray(2, false);
     #endregion
 
     // Use this for initialization
     void Start()
     {
         GOTransform = gameObject.transform;
-        ChildCamera.transform.parent = GOTransform;
+        CamTransform = ChildCamera.transform;
     }
 
     // Update is called once per frame
@@ -72,10 +84,39 @@ public class PlayerController : MonoBehaviour
         stepValues.OrbitStep             = OrbitSpeed * Time.deltaTime;
         stepValues.OrbitReturnStep       = OrbitReturnSpeed * Time.deltaTime;
 
-        DoKeyboardInput(stepValues);
-        //DoControllerInput(stepValues);
+        //DoKeyboardInput(stepValues);
+
+        LeftStickState[0] = LeftStickState[1];
+        RightStickState[0] = RightStickState[1];
+
+        LeftStickState[1] = Input.GetAxis(LeftStick_HorizontalAxisName) != 0 || Input.GetAxis(LeftStick_VerticalAxisName) != 0;
+        RightStickState[1] = Input.GetAxis(RightStick_HorizontalAxisName) != 0 || Input.GetAxis(RightStick_VerticalAxisName) != 0;
+
+        Debug.Log(LeftStickState[0] + "     " + LeftStickState[1]);
+
+        DoControllerInput(stepValues);
     }
-    
+
+    private bool IsRightStickActive()
+    {
+        return RightStickState[1];
+    }
+
+    private bool WasRightStickActive()
+    {
+        return RightStickState[0];
+    }
+
+    private bool IsLeftStickActive()
+    {
+        return LeftStickState[1];
+    }
+
+    private bool WasLeftStickActive()
+    {
+        return LeftStickState[0];
+    }
+
     private Vector3 StepMovement(Vector3 dir, float step)
     {
         if (OnMovementStep != null)
@@ -103,11 +144,6 @@ public class PlayerController : MonoBehaviour
 
     private void OrbitCam(float xAxis, float yAxis, float step)
     {
-        if (Physics.Raycast(ChildCamera.transform.position, -GOTransform.up, 1.0f))
-        {
-            return;
-        }
-
         Vector3 curPos = GOTransform.position;
         Vector3 oldCamPos = ChildCamera.transform.position;
 
@@ -116,20 +152,32 @@ public class PlayerController : MonoBehaviour
 
         Vector3 newCamPos = ChildCamera.transform.position;
         Vector3 origCamPos = GOTransform.transform.forward * -CameraDistance;
-        Vector3 diff = origCamPos - newCamPos;
 
-        if (Vector3.Angle(newCamPos, origCamPos) >= 90.0f)
+        if (Physics.Raycast(ChildCamera.transform.position, -GOTransform.up, 1.0f))
         {
+            oldCamPos.x = newCamPos.x;
+            oldCamPos.z = newCamPos.z;
             ChildCamera.transform.position = oldCamPos;
+        }
+        else
+        {
+            if (Vector3.Angle(origCamPos, newCamPos) >= 90.0f)
+            {
+                // #TODO(Josh) Don't just stop input for x and y when limited by only one
+//                 if (Vector3.Dot(newCamPos.normalized, GOTransform.right) > 0)
+//                 {
+//                 }
+
+                ChildCamera.transform.position = oldCamPos;
+            }
         }
 
         ChildCamera.transform.LookAt(curPos);
     }
-
+    
     private void TryOrbitReturn(float step)
     {
-        Vector3 cameraReturnPos = gameObject.transform.position + (gameObject.transform.forward * -CameraDistance);
-        cameraReturnPos = Quaternion.AngleAxis(CameraAngle, new Vector3(1, 0, 0)) * cameraReturnPos;
+        Vector3 cameraReturnPos = gameObject.transform.position + ((Quaternion.AngleAxis(CameraAngle, ChildCamera.transform.right) * gameObject.transform.forward) * -CameraDistance);
 
         Vector3 dist = cameraReturnPos - ChildCamera.transform.position;
         if (dist.sqrMagnitude >= Vector3.kEpsilon * Vector3.kEpsilon)
@@ -192,28 +240,29 @@ public class PlayerController : MonoBehaviour
     private void DoControllerInput(StepValues stepValues)
     {
         // Left stick
-        float yAxisLeft = Input.GetAxis("VerticalLeft");
-        float xAxisLeft = Input.GetAxis("HorizontalLeft");
+        float yAxisLeft = Input.GetAxis(LeftStick_VerticalAxisName);
+        float xAxisLeft = Input.GetAxis(LeftStick_HorizontalAxisName);
         // Right stick
-        float yAxisRight = Input.GetAxis("VerticalRight");
-        float xAxisRight = Input.GetAxis("HorizontalRight");
+        float yAxisRight = Input.GetAxis(RightStick_VerticalAxisName);
+        float xAxisRight = Input.GetAxis(RightStick_HorizontalAxisName);
 
         Vector3 curPos = gameObject.transform.position;
 
-        // translation
+        /*
+         * Movement
+         * 
+         */
+        if (IsLeftStickActive())
         {
             Vector3 steppedPosition = StepMovement(GOTransform.forward, stepValues.MoveStep * yAxisLeft);
             GOTransform.position += steppedPosition;
-        }
 
-        // rotation
-        {
-            Vector3 steppedRotation = StepRotation(gameObject.transform.forward, stepValues.RotStep * xAxisLeft);
+            Vector3 steppedRotation = StepRotation(gameObject.transform.right, stepValues.RotStep * xAxisLeft);
             gameObject.transform.rotation = Quaternion.LookRotation(steppedRotation);
         }
-
+        
         // orbit
-        if (xAxisRight != 0.0f || yAxisRight != 0.0f)
+        if (IsRightStickActive())
         {
             OrbitCam(xAxisRight, yAxisRight, stepValues.OrbitStep * ControllerSensitivity);
         }
