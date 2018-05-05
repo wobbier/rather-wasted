@@ -83,7 +83,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector3 curPos = gameObject.transform.position;
-        Vector3 desiredPos = curPos + gameObject.transform.right;
+        Vector3 desiredPos = curPos + dir;
         Vector3 targetPos = desiredPos - curPos;
 
         Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, step, 0.25f).normalized;
