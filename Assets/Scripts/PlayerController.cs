@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         StepValues stepValues;
         stepValues.MoveStep              = MoveSpeed * Time.deltaTime;
@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log(LeftStickState[0] + "     " + LeftStickState[1]);
 
         DoControllerInput(stepValues);
+        //DoKeyboardInput(stepValues);
     }
 
     private bool IsRightStickActive()
@@ -117,31 +118,23 @@ public class PlayerController : MonoBehaviour
         return LeftStickState[0];
     }
 
-    private Vector3 StepMovement(Vector3 dir, float step)
+    private void StepMovement(float xAxisVal, float yAxisVal, float step)
     {
         if (OnMovementStep != null)
         {
             OnMovementStep.Invoke(step);
         }
+        
+        Vector3 desiredForward = GOTransform.forward * yAxisVal;
+        Vector3 desiredRight = GOTransform.right * xAxisVal;
 
-        return dir * step;
+        Vector3 steppedPosition = GOTransform.position + (desiredForward + desiredRight);
+        Vector3 newDir = (steppedPosition - GOTransform.position).normalized;
+
+        GOTransform.rotation = Quaternion.Slerp(GOTransform.rotation, Quaternion.LookRotation(newDir), RotateSpeed * Time.deltaTime);
+        GOTransform.position = Vector3.Slerp(GOTransform.position, steppedPosition, step);
     }
-
-    private Vector3 StepRotation(Vector3 dir, float step)
-    {
-        if (OnMovementRotate != null)
-        {
-            OnMovementRotate.Invoke(step);
-        }
-
-        Vector3 curPos = gameObject.transform.position;
-        Vector3 desiredPos = curPos + dir;
-        Vector3 targetPos = desiredPos - curPos;
-
-        Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, step, 0.25f).normalized;
-        return newDir;
-    }
-
+    
     private void OrbitCam(float xAxis, float yAxis, float step)
     {
         Vector3 curPos = GOTransform.position;
@@ -192,24 +185,20 @@ public class PlayerController : MonoBehaviour
         // Keyboard
         if (Input.GetKey(KeyCode.W))
         {
-            Vector3 steppedMovement = StepMovement(GOTransform.forward, stepValues.MoveStep);
-            GOTransform.position += steppedMovement;
+            StepMovement(0.0f, 1.0f, stepValues.MoveStep);
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            Vector3 steppedMovement = StepMovement(-GOTransform.forward, stepValues.MoveStep);
-            GOTransform.position += steppedMovement;
+            StepMovement(0.0f, -1.0f, stepValues.MoveStep);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            Vector3 steppedRotation = StepRotation(GOTransform.right, stepValues.RotStep);
-            gameObject.transform.rotation = Quaternion.LookRotation(steppedRotation);
+            StepMovement(1.0f, 0.0f, stepValues.MoveStep);
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            Vector3 steppedRotation = StepRotation(-GOTransform.right, stepValues.RotStep);
-            gameObject.transform.rotation = Quaternion.LookRotation(steppedRotation);
+            StepMovement(-1.0f, 0.0f, stepValues.MoveStep);
         }
         
         if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
@@ -254,11 +243,11 @@ public class PlayerController : MonoBehaviour
          */
         if (IsLeftStickActive())
         {
-            Vector3 steppedPosition = StepMovement(GOTransform.forward, stepValues.MoveStep * yAxisLeft);
-            GOTransform.position += steppedPosition;
+            StepMovement(xAxisLeft, yAxisLeft, stepValues.MoveStep);
+            
 
-            Vector3 steppedRotation = StepRotation(gameObject.transform.right, stepValues.RotStep * xAxisLeft);
-            gameObject.transform.rotation = Quaternion.LookRotation(steppedRotation);
+//             Vector3 steppedRotation = StepRotation(gameObject.transform.right, stepValues.RotStep * xAxisLeft);
+//             gameObject.transform.rotation = Quaternion.LookRotation(steppedRotation);
         }
         
         // orbit
