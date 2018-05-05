@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Public Members
-    public Camera MainCamera;
+    public Camera ChildCamera;
     #endregion
 
     #region Public Exposed Movement Members
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        MainCamera.transform.parent = gameObject.transform;
+        ChildCamera.transform.parent = gameObject.transform;
     }
 
     // Update is called once per frame
@@ -28,10 +28,11 @@ public class PlayerController : MonoBehaviour
         float moveStep = MoveSpeed * Time.deltaTime;
         float rotStep = RotateSpeed * Time.deltaTime;
 
-        DoInput(moveStep, rotStep);
+        DoKeyboardInput(moveStep, rotStep);
+        DoControllerInput(moveStep, rotStep);
     }
 
-    private void DoInput(float moveStep, float rotStep)
+    private void DoKeyboardInput(float moveStep, float rotStep)
     {
         if (Input.GetKey(KeyCode.W))
         {
@@ -61,6 +62,27 @@ public class PlayerController : MonoBehaviour
 
             // rotation
             Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, RotateSpeed * Time.deltaTime, 0.25f).normalized;
+            gameObject.transform.rotation = Quaternion.LookRotation(newDir);
+        }
+    }
+
+    private void DoControllerInput(float moveStep, float rotStep)
+    {
+        float yAxis = Input.GetAxis("Vertical");
+        float xAxis = Input.GetAxis("Horizontal");
+
+        // translation
+        {
+            gameObject.transform.position += gameObject.transform.forward * moveStep * yAxis;
+        }
+
+        // rotation
+        {
+            Vector3 curPos = gameObject.transform.position;
+            Vector3 desiredPos = curPos + gameObject.transform.right;
+            Vector3 targetPos = desiredPos - curPos;
+
+            Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, rotStep * xAxis, 0.25f).normalized;
             gameObject.transform.rotation = Quaternion.LookRotation(newDir);
         }
     }
