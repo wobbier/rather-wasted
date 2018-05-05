@@ -10,6 +10,8 @@ ModelImporter:
     100008: Thirstyboy_eyes
     100010: Thirstyboy_feet
     100012: Thirstyboy_mouth
+    100014: Thirstyboy_Left
+    100016: Thirstyboybody_low
     400000: //RootNode
     400002: Thirstyboy_body
     400004: Thirstyboy_buttons
@@ -17,6 +19,8 @@ ModelImporter:
     400008: Thirstyboy_eyes
     400010: Thirstyboy_feet
     400012: Thirstyboy_mouth
+    400014: Thirstyboy_Left
+    400016: Thirstyboybody_low
     2100000: No Name
     2100002: Thirstyboy
     2300000: Thirstyboy_body
@@ -26,6 +30,7 @@ ModelImporter:
     2300008: Thirstyboy_feet
     2300010: Thirstyboy_mouth
     2300012: //RootNode
+    2300014: Thirstyboybody_low
     3300000: Thirstyboy_body
     3300002: Thirstyboy_buttons
     3300004: Thirstyboy_crown
@@ -33,6 +38,7 @@ ModelImporter:
     3300008: Thirstyboy_feet
     3300010: Thirstyboy_mouth
     3300012: //RootNode
+    3300014: Thirstyboybody_low
     4300000: Thirstyboy_body
     4300002: Thirstyboy_feet
     4300004: Thirstyboy_eyes
@@ -40,6 +46,10 @@ ModelImporter:
     4300008: Thirstyboy_buttons
     4300010: Thirstyboy_crown
     4300012: Thirstyboybody_low
+    7400000: run
+    7400002: Slam
+    7400004: SlamRecover
+    9500000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -60,7 +70,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -115,7 +125,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
