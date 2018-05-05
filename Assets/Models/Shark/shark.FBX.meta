@@ -1,0 +1,159 @@
+fileFormatVersion: 2
+guid: 0438d216372b888438ea617766f7de5f
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: shark_dorsal01
+    100004: shark_dorsal02
+    100006: shark_dorsal03
+    100008: shark_finLEFT01
+    100010: shark_finLEFT02
+    100012: shark_finLEFT03
+    100014: shark_finRIGHT01
+    100016: shark_finRIGHT02
+    100018: shark_finRIGHT03
+    100020: shark_head
+    100022: shark_Jaw
+    100024: shark_low
+    100026: shark_spine01
+    100028: shark_spine02
+    100030: shark_spine03
+    100032: shark_tail01
+    100034: shark_tail02
+    100036: shark_tail03
+    100038: shark_tail04
+    100040: shark_tail05
+    100042: shark_tailfinBOTTOM01
+    100044: shark_tailfinBOTTOM02
+    100046: shark_tailfinBOTTOM03
+    100048: shark_tailfinTOP01
+    100050: shark_tailfinTOP02
+    100052: shark_tailfinTOP03
+    100054: sharkbody_low
+    100056: sharkeyes_low
+    100058: sharkteeth1_low
+    100060: sharkteeth2_low
+    400000: //RootNode
+    400002: shark_dorsal01
+    400004: shark_dorsal02
+    400006: shark_dorsal03
+    400008: shark_finLEFT01
+    400010: shark_finLEFT02
+    400012: shark_finLEFT03
+    400014: shark_finRIGHT01
+    400016: shark_finRIGHT02
+    400018: shark_finRIGHT03
+    400020: shark_head
+    400022: shark_Jaw
+    400024: shark_low
+    400026: shark_spine01
+    400028: shark_spine02
+    400030: shark_spine03
+    400032: shark_tail01
+    400034: shark_tail02
+    400036: shark_tail03
+    400038: shark_tail04
+    400040: shark_tail05
+    400042: shark_tailfinBOTTOM01
+    400044: shark_tailfinBOTTOM02
+    400046: shark_tailfinBOTTOM03
+    400048: shark_tailfinTOP01
+    400050: shark_tailfinTOP02
+    400052: shark_tailfinTOP03
+    400054: sharkbody_low
+    400056: sharkeyes_low
+    400058: sharkteeth1_low
+    400060: sharkteeth2_low
+    2100000: 'Material #48'
+    2100002: shark
+    4300000: sharkbody_low
+    4300002: sharkeyes_low
+    4300004: sharkteeth1_low
+    4300006: sharkteeth2_low
+    9500000: //RootNode
+    13700000: sharkbody_low
+    13700002: sharkeyes_low
+    13700004: sharkteeth1_low
+    13700006: sharkteeth2_low
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
