@@ -7,8 +7,10 @@ public class AIDirector : MonoBehaviour {
     public int InitialAmountToSpawn = 5;
 
     public GameObject Civillian;
+    public float SpawnRate;
 
     private AISpawnPoint[] m_spawnPoints;
+    private float m_spawnTimer = 5;
 
     // Use this for initialization
     void Awake()
@@ -19,11 +21,16 @@ public class AIDirector : MonoBehaviour {
         {
             Instantiate(Civillian, m_spawnPoints[Random.Range(0, m_spawnPoints.Length)].transform.position, Quaternion.identity);
         }
-
+        m_spawnTimer = SpawnRate;
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
+        m_spawnTimer -= Time.deltaTime;
+        if(m_spawnTimer < 0)
+        {
+            Instantiate(Civillian, m_spawnPoints[Random.Range(0, m_spawnPoints.Length)].transform.position, Quaternion.identity);
+            m_spawnTimer = SpawnRate;
+        }
 	}
 }
