@@ -66,8 +66,8 @@ public class PlayerController : MonoBehaviour
         stepValues.OrbitStep             = OrbitSpeed * Time.deltaTime;
         stepValues.OrbitReturnStep       = OrbitReturnSpeed * Time.deltaTime;
 
-        //DoKeyboardInput(stepValues);
-        DoControllerInput(stepValues);
+        DoKeyboardInput(stepValues);
+        //DoControllerInput(stepValues);
     }
     
     private Vector3 StepMovement(Vector3 dir, float step)
