@@ -37,9 +37,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4073968772979314}
-  - component: {fileID: 136691325926172120}
   - component: {fileID: 54201864525704304}
   - component: {fileID: 114848532061705678}
+  - component: {fileID: 65464508158077996}
   m_Layer: 0
   m_Name: VendingMachinePlayer
   m_TagString: Untagged
@@ -68,7 +68,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1485912348807606}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4073968772979314}
@@ -131,6 +131,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &65464508158077996
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1543103283455848}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.0809, y: 3.7537498, z: 1.3866291}
+  m_Center: {x: -0.0038269758, y: 0.6222224, z: -0.024742842}
 --- !u!95 &95597174113672276
 Animator:
   serializedVersion: 3
@@ -166,19 +178,6 @@ MonoBehaviour:
   OrbitSpeed: 6
   OrbitReturnSpeed: 2
   CameraDistance: 10
-  CameraAngle: 1
+  CameraAngle: 25
   ControllerSensitivity: 15
   SkinAnimator: {fileID: 95597174113672276}
---- !u!136 &136691325926172120
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1543103283455848}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

@@ -27,7 +27,7 @@ public class SharkController : PlayerController
 
     private void OnMove(float val)
     {
-        if(m_state != CharacterState.Moving)
+        if(m_state == CharacterState.Idle)
         {
             SkinAnimator.Play("Walk");
             m_state = CharacterState.Moving;
@@ -40,8 +40,16 @@ public class SharkController : PlayerController
         SkinAnimator.Play("Slam");
     }
 
-    public void Update()
+    public void LateUpdate()
     {
+        if (m_state == CharacterState.PrimaryAttack)
+        {
+            if (SkinAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                m_state = CharacterState.Idle;
+            }
+            return;
+        }
         if(Input.GetKeyDown(KeyCode.E))
         {
             PrimaryAttack();
@@ -50,6 +58,15 @@ public class SharkController : PlayerController
         if (m_state != m_previousState)
         {
 
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(m_state == CharacterState.PrimaryAttack && collision.transform.tag == "Civillian")
+        {
+            collision.gameObject.GetComponent<Animator>().Play("Death");
+            Destroy(collision.gameObject, 1);
         }
     }
 
