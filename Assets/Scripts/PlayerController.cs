@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     public delegate void MovementRotateDelegate(float val);
 
     public delegate void MashDelegate();
+    public delegate void AttackDelegate();
     #endregion
 
     #region Public Events
@@ -23,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public event MovementRotateDelegate OnMovementRotate;
 
     public event MashDelegate OnMash;
+    public event AttackDelegate OnAttack;
     #endregion
 
     #region Public Movement Members
@@ -164,9 +166,9 @@ public class PlayerController : MonoBehaviour
         
         if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
         {
-            if (OnMash != null)
+            if (OnAttack != null)
             {
-                OnMash.Invoke();
+                OnAttack.Invoke();
             }
         }
 
