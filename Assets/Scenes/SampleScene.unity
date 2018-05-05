@@ -438,3 +438,4 @@ MonoBehaviour:
   MoveSpeed: 4
   RotateSpeed: 1
   OrbitSpeed: 4
+  CameraDistance: 5

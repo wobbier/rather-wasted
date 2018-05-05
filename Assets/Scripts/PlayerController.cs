@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float MoveSpeed = 1.0f;
     public float RotateSpeed = 1.0f;
     public float OrbitSpeed = 1.0f;
+    public float CameraDistance = 1.0f;
     #endregion
 
     #region Private Structures
@@ -24,6 +25,11 @@ public class PlayerController : MonoBehaviour
         public float RotStep;
         public float OrbitStep;
     }
+    #endregion
+
+    #region Private Members
+    float lastX;
+    float lastY;
     #endregion
 
     // Use this for initialization
@@ -44,6 +50,7 @@ public class PlayerController : MonoBehaviour
         DoControllerInput(stepValues);
     }
 
+    bool test = false;
     private void DoKeyboardInput(StepValues stepValues)
     {
         // Keyboard
@@ -77,13 +84,13 @@ public class PlayerController : MonoBehaviour
             Vector3 newDir = Vector3.RotateTowards(gameObject.transform.forward, targetPos, stepValues.RotStep, 0.25f).normalized;
             gameObject.transform.rotation = Quaternion.LookRotation(newDir);
         }
-
+        
         // Mouse
         if (Input.GetMouseButton(1))
         {
             float xAxis = Input.GetAxis("MouseX");
             float yAxis = Input.GetAxis("MouseY");
-
+            
             if (xAxis != 0 || yAxis != 0)
             {
                 Vector3 curPos = gameObject.transform.position;
@@ -95,7 +102,17 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            Vector3 cameraReturnPos = gameObject.transform.position + (gameObject.transform.forward * -CameraDistance);
+            Vector3 dist = cameraReturnPos - ChildCamera.transform.position;
+            if (dist.sqrMagnitude >= Vector3.kEpsilon * Vector3.kEpsilon)
+            {
+                Vector3 diff = cameraReturnPos - ChildCamera.transform.position;
+                Vector3 vec = gameObject.transform.position;
 
+
+//                 ChildCamera.transform.position = Vector3.Lerp(ChildCamera.transform.position, cameraReturnPos, stepValues.OrbitStep);
+//                 ChildCamera.transform.LookAt(gameObject.transform.position);
+            }
         }
     }
 
