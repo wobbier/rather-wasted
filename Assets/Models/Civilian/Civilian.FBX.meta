@@ -6,19 +6,93 @@ ModelImporter:
     100000: //RootNode
     100002: civilian_body
     100004: civilian_head
+    100006: Civilian
+    100008: Civilian 1
+    100010: Civilian_2
+    100012: Civilian_ClavL
+    100014: Civilian_ClavR
+    100016: Civilian_FootL
+    100018: Civilian_FootR
+    100020: Civilian_ForearmL
+    100022: Civilian_ForearmR
+    100024: Civilian_Head
+    100026: Civilian_LowerlegL
+    100028: Civilian_LowerlegR
+    100030: Civilian_Neck
+    100032: Civilian_pelvis
+    100034: Civilian_Spine1
+    100036: Civilian_ThighL
+    100038: Civilian_ThighR
+    100040: Civilian_UpperarmL
+    100042: Civilian_UpperarmR
+    100044: Civilian_UpperlegL
+    100046: Civilian_UpperlegR
+    100048: IK Chain001
+    100050: IK Chain002
+    100052: Civilian_Spine2
     400000: //RootNode
     400002: civilian_body
     400004: civilian_head
+    400006: Civilian
+    400008: Civilian 1
+    400010: Civilian_2
+    400012: Civilian_ClavL
+    400014: Civilian_ClavR
+    400016: Civilian_FootL
+    400018: Civilian_FootR
+    400020: Civilian_ForearmL
+    400022: Civilian_ForearmR
+    400024: Civilian_Head
+    400026: Civilian_LowerlegL
+    400028: Civilian_LowerlegR
+    400030: Civilian_Neck
+    400032: Civilian_pelvis
+    400034: Civilian_Spine1
+    400036: Civilian_ThighL
+    400038: Civilian_ThighR
+    400040: Civilian_UpperarmL
+    400042: Civilian_UpperarmR
+    400044: Civilian_UpperlegL
+    400046: Civilian_UpperlegR
+    400048: IK Chain001
+    400050: IK Chain002
+    400052: Civilian_Spine2
     2100000: No Name
     2300000: civilian_body
     2300002: civilian_head
     2300004: //RootNode
+    2300006: Civilian
     3300000: civilian_body
     3300002: civilian_head
     3300004: //RootNode
+    3300006: Civilian
     4300000: civilian_head
     4300002: civilian_body
     4300004: Civilian
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+    11100002: Civilian
+    11100004: Civilian_2
+    11100006: Civilian_ClavL
+    11100008: Civilian_ClavR
+    11100010: Civilian_FootL
+    11100012: Civilian_FootR
+    11100014: Civilian_ForearmL
+    11100016: Civilian_ForearmR
+    11100018: Civilian_Head
+    11100020: Civilian_LowerlegL
+    11100022: Civilian_LowerlegR
+    11100024: Civilian_Neck
+    11100026: Civilian_pelvis
+    11100028: Civilian_Spine1
+    11100030: Civilian_ThighL
+    11100032: Civilian_ThighR
+    11100034: Civilian_UpperarmL
+    11100036: Civilian_UpperarmR
+    11100038: Civilian_UpperlegL
+    11100040: Civilian_UpperlegR
+    13700000: Civilian
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -91,10 +165,10 @@ ModelImporter:
     rootMotionBoneName: 
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasExtraRoot: 1
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 1
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

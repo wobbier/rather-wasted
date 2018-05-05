@@ -18,24 +18,28 @@ ModelImporter:
     400010: Thirstyboy_feet
     400012: Thirstyboy_mouth
     2100000: No Name
+    2100002: Thirstyboy
     2300000: Thirstyboy_body
     2300002: Thirstyboy_buttons
     2300004: Thirstyboy_crown
     2300006: Thirstyboy_eyes
     2300008: Thirstyboy_feet
     2300010: Thirstyboy_mouth
+    2300012: //RootNode
     3300000: Thirstyboy_body
     3300002: Thirstyboy_buttons
     3300004: Thirstyboy_crown
     3300006: Thirstyboy_eyes
     3300008: Thirstyboy_feet
     3300010: Thirstyboy_mouth
+    3300012: //RootNode
     4300000: Thirstyboy_body
     4300002: Thirstyboy_feet
     4300004: Thirstyboy_eyes
     4300006: Thirstyboy_mouth
     4300008: Thirstyboy_buttons
     4300010: Thirstyboy_crown
+    4300012: Thirstyboybody_low
   externalObjects: {}
   materials:
     importMaterials: 1
