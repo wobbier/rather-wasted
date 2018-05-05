@@ -439,5 +439,6 @@ MonoBehaviour:
   RotateSpeed: 1
   OrbitSpeed: 6
   OrbitReturnSpeed: 2
-  CameraDistance: 5
+  CameraDistance: 8
+  CameraAngle: 25
   ControllerSensitivity: 15

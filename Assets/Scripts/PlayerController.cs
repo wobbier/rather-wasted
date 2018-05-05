@@ -27,7 +27,10 @@ public class PlayerController : MonoBehaviour
     public float RotateSpeed = 1.0f;
     public float OrbitSpeed = 1.0f;
     public float OrbitReturnSpeed = 1.0f;
+
+    [Space(10)]
     public float CameraDistance = 1.0f;
+    public float CameraAngle = 1.0f;
 
     [Space(10)]
     public float ControllerSensitivity = 1.0f;
@@ -95,15 +98,28 @@ public class PlayerController : MonoBehaviour
     private void OrbitCam(float xAxis, float yAxis, float step)
     {
         Vector3 curPos = GOTransform.position;
+        Vector3 oldCamPos = ChildCamera.transform.position;
 
         ChildCamera.transform.RotateAround(curPos, Vector3.right, step * yAxis);
         ChildCamera.transform.RotateAround(curPos, Vector3.up, step * xAxis);
+
+        Vector3 newCamPos = ChildCamera.transform.position;
+        Vector3 origCamPos = GOTransform.transform.forward * -CameraDistance;
+        Vector3 diff = origCamPos - newCamPos;
+
+        if (Vector3.Angle(newCamPos, origCamPos) >= 90.0f)
+        {
+            ChildCamera.transform.position = oldCamPos;
+        }
+
         ChildCamera.transform.LookAt(curPos);
     }
 
     private void TryOrbitReturn(float step)
     {
         Vector3 cameraReturnPos = gameObject.transform.position + (gameObject.transform.forward * -CameraDistance);
+        cameraReturnPos = Quaternion.AngleAxis(CameraAngle, new Vector3(1, 0, 0)) * cameraReturnPos;
+
         Vector3 dist = cameraReturnPos - ChildCamera.transform.position;
         if (dist.sqrMagnitude >= Vector3.kEpsilon * Vector3.kEpsilon)
         {
