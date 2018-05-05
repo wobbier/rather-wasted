@@ -14,11 +14,15 @@ public class PlayerController : MonoBehaviour
     #region Private Delegate Declarations
     public delegate void MovementStepDelegate(float val);
     public delegate void MovementRotateDelegate(float val);
+
+    public delegate void MashDelegate();
     #endregion
 
     #region Public Events
     public event MovementStepDelegate OnMovementStep;
     public event MovementRotateDelegate OnMovementRotate;
+
+    public event MashDelegate OnMash;
     #endregion
 
     #region Public Movement Members
@@ -158,6 +162,14 @@ public class PlayerController : MonoBehaviour
             gameObject.transform.rotation = Quaternion.LookRotation(steppedRotation);
         }
         
+        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
+        {
+            if (OnMash != null)
+            {
+                OnMash.Invoke();
+            }
+        }
+
         // Mouse
         if (Input.GetMouseButton(1))
         {
