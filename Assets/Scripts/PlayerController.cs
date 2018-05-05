@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         stepValues.RotStep      = RotateSpeed * Time.deltaTime;
         stepValues.OrbitStep    = OrbitSpeed * Time.deltaTime;
 
-        DoKeyboardInput(stepValues);
+        //DoKeyboardInput(stepValues);
         DoControllerInput(stepValues);
     }
 
@@ -106,12 +106,7 @@ public class PlayerController : MonoBehaviour
             Vector3 dist = cameraReturnPos - ChildCamera.transform.position;
             if (dist.sqrMagnitude >= Vector3.kEpsilon * Vector3.kEpsilon)
             {
-                Vector3 diff = cameraReturnPos - ChildCamera.transform.position;
-                Vector3 vec = gameObject.transform.position;
-
-
-//                 ChildCamera.transform.position = Vector3.Lerp(ChildCamera.transform.position, cameraReturnPos, stepValues.OrbitStep);
-//                 ChildCamera.transform.LookAt(gameObject.transform.position);
+                ChildCamera.transform.position = Vector3.Slerp(ChildCamera.transform.position, cameraReturnPos, stepValues.OrbitStep);
             }
         }
     }
@@ -142,10 +137,21 @@ public class PlayerController : MonoBehaviour
         }
 
         // orbit
+        if (xAxisRight != 0.0f || yAxisRight != 0.0f)
         {
             ChildCamera.transform.RotateAround(curPos, Vector3.right, stepValues.OrbitStep * yAxisRight * 10);
             ChildCamera.transform.RotateAround(curPos, Vector3.up, stepValues.OrbitStep * xAxisRight * 10);
             ChildCamera.transform.LookAt(curPos);
+        }
+        else
+        {
+            Vector3 cameraReturnPos = gameObject.transform.position + (gameObject.transform.forward * -CameraDistance);
+            Vector3 dist = cameraReturnPos - ChildCamera.transform.position;
+            if (dist.sqrMagnitude >= Vector3.kEpsilon * Vector3.kEpsilon)
+            {
+                ChildCamera.transform.position = Vector3.Slerp(ChildCamera.transform.position, cameraReturnPos, stepValues.OrbitStep);
+                ChildCamera.transform.LookAt(curPos);
+            }
         }
     }
 }
