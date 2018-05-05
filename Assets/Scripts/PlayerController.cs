@@ -22,12 +22,14 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Public Movement Members
+    [Space(10)]
     public float MoveSpeed = 1.0f;
     public float RotateSpeed = 1.0f;
     public float OrbitSpeed = 1.0f;
     public float OrbitReturnSpeed = 1.0f;
     public float CameraDistance = 1.0f;
 
+    [Space(10)]
     public float ControllerSensitivity = 1.0f;
     #endregion
 
