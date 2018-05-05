@@ -67,11 +67,21 @@ public class PlayerController : MonoBehaviour
     
     private Vector3 StepMovement(Vector3 dir, float step)
     {
+        if (OnMovementStep != null)
+        {
+            OnMovementStep.Invoke(step);
+        }
+
         return dir * step;
     }
 
     private Vector3 StepRotation(Vector3 dir, float step)
     {
+        if (OnMovementRotate != null)
+        {
+            OnMovementRotate.Invoke(step);
+        }
+
         Vector3 curPos = gameObject.transform.position;
         Vector3 desiredPos = curPos + gameObject.transform.right;
         Vector3 targetPos = desiredPos - curPos;
