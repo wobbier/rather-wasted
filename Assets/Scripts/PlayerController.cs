@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
     #region Private Delegate Declarations
     public delegate void MovementBeginDelegate();
     public delegate void MovementEndDelegate();
+    public delegate void RotationBeginDelegate(float val);
 
     public delegate void MainAbilityButtonDelegate();
     public delegate void SecondaryAbilityButtonDelegate();
@@ -37,7 +38,8 @@ public class PlayerController : MonoBehaviour
     #region Public Events
     public event MovementBeginDelegate OnMovementBegin;
     public event MovementEndDelegate OnMovementEnd;
-    
+    public event RotationBeginDelegate OnRotationBegin;
+
     public event MainAbilityButtonDelegate OnMainAbility;
     public event SecondaryAbilityButtonDelegate OnSecondaryAbility;
 
@@ -187,6 +189,15 @@ public class PlayerController : MonoBehaviour
 
             Vector3 steppedPosition = GOTransform.position + (desiredForward + desiredRight).normalized;
             Vector3 newDir = (steppedPosition - GOTransform.position).normalized;
+
+            Quaternion slerpedRot = Quaternion.Slerp(GOTransform.rotation, Quaternion.LookRotation(newDir), RotateSpeed * Time.deltaTime);
+            if (slerpedRot != GOTransform.rotation)
+            {
+                if (OnRotationBegin != null)
+                {
+                    OnRotationBegin.Invoke(xAxisVal);
+                }
+            }
 
             GOTransform.rotation = Quaternion.Slerp(GOTransform.rotation, Quaternion.LookRotation(newDir), RotateSpeed * Time.deltaTime);
             GOTransform.position = Vector3.Slerp(GOTransform.position, steppedPosition, step);
