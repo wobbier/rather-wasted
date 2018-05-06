@@ -253,6 +253,7 @@ ModelImporter:
     7400002: RunRight
     7400004: RunLeft
     7400006: Bite
+    7400008: idle
     9500000: //RootNode
     13700000: sharkbody_low
     13700002: sharkeyes_low
