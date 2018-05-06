@@ -116,6 +116,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1311177989889954
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4402495825241434}
+  - component: {fileID: 65905935198238630}
+  m_Layer: 0
+  m_Name: Mouth
+  m_TagString: Player
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1331016880056120
 GameObject:
   m_ObjectHideFlags: 1
@@ -547,6 +563,19 @@ Transform:
   m_Father: {fileID: 4860172146976794}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4402495825241434
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1311177989889954}
+  m_LocalRotation: {x: 0.00000006144246, y: 9.145388e-10, z: 0.029507976, w: 0.9995646}
+  m_LocalPosition: {x: -2.45, y: -0.341, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4818682246978110}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4428431632690922
 Transform:
   m_ObjectHideFlags: 1
@@ -570,7 +599,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1911013489727282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.749065, y: 4.21, z: -9.29}
+  m_LocalPosition: {x: 6.749065, y: 4.21, z: -10.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4988050368201622}
@@ -738,6 +767,7 @@ Transform:
   m_Children:
   - {fileID: 4883030198987350}
   - {fileID: 4715695678798186}
+  - {fileID: 4402495825241434}
   m_Father: {fileID: 4428431632690922}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -871,6 +901,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!65 &65905935198238630
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1311177989889954}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.3427048, y: 1.6554911, z: 2.0839734}
+  m_Center: {x: 0.11020481, y: 0.1454241, z: -0.13919167}
 --- !u!95 &95403003589343704
 Animator:
   serializedVersion: 3
@@ -911,6 +953,7 @@ MonoBehaviour:
   CameraAngle: 45
   ControllerSensitivity: 15
   SkinAnimator: {fileID: 95403003589343704}
+  Mouth: {fileID: 4402495825241434}
 --- !u!136 &136428647765354564
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -920,10 +963,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.89
+  m_Height: 5.5
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.72, z: -0.83}
 --- !u!137 &137897638399384744
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
