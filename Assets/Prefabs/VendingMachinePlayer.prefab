@@ -305,6 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ChildCamera: {fileID: 0}
+  PlayerName: P1
   ControllerIdx: 0
   ApplyMovement: 1
   MoveSpeed: 4
@@ -343,7 +344,7 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100002, guid: ea211cba6617eb24aa30395f518566cc, type: 3}
+  - {fileID: 2100000, guid: 2979613eb59d240439a2757e920b7aec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -41,7 +41,8 @@ public class CivillianAI : MonoBehaviour
 
     public void Die()
     {
-        SkinAnimator.Play("idle");
+        SkinAnimator.StopPlayback();
+        SkinAnimator.Play("run");
         m_nav.isStopped = true;
         GetComponent<Collider>().enabled = false;
         m_nav.enabled = false;

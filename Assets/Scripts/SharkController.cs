@@ -103,7 +103,7 @@ public class SharkController : PlayerController
             //other.gameObject.GetComponent<Animator>().Play("Death");
             other.transform.parent = Mouth;
             other.transform.localPosition = Vector3.zero;
-            other.transform.rotation = Quaternion.identity;
+            other.transform.rotation = Quaternion.LookRotation(Vector3.up, -Vector3.right);
             other.GetComponent<CivillianAI>().Die();
             Destroy(other.gameObject, 2);
             //other.gameObject.SetActive(false);
