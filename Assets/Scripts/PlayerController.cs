@@ -16,6 +16,10 @@ public class PlayerController : MonoBehaviour
 
     #region Public Members
     public Camera ChildCamera;
+
+    public int ControllerIdx;
+
+    public bool ApplyMovement = true;
     #endregion
 
     #region Private Delegate Declarations
@@ -142,15 +146,18 @@ public class PlayerController : MonoBehaviour
 
     private void StepMovement(float xAxisVal, float yAxisVal, float step)
     {
-        Vector3 scaledCamForward = Vector3.Scale(CamTransform.forward, new Vector3(1, 0, 1));
-        Vector3 desiredForward = scaledCamForward * yAxisVal;
-        Vector3 desiredRight = CamTransform.right * xAxisVal;
+        if (ApplyMovement)
+        {
+            Vector3 scaledCamForward = Vector3.Scale(CamTransform.forward, new Vector3(1, 0, 1));
+            Vector3 desiredForward = scaledCamForward * yAxisVal;
+            Vector3 desiredRight = CamTransform.right * xAxisVal;
 
-        Vector3 steppedPosition = GOTransform.position + (desiredForward + desiredRight).normalized;
-        Vector3 newDir = (steppedPosition - GOTransform.position).normalized;
+            Vector3 steppedPosition = GOTransform.position + (desiredForward + desiredRight).normalized;
+            Vector3 newDir = (steppedPosition - GOTransform.position).normalized;
 
-        GOTransform.rotation = Quaternion.Slerp(GOTransform.rotation, Quaternion.LookRotation(newDir), RotateSpeed * Time.deltaTime);
-        GOTransform.position = Vector3.Slerp(GOTransform.position, steppedPosition, step);
+            GOTransform.rotation = Quaternion.Slerp(GOTransform.rotation, Quaternion.LookRotation(newDir), RotateSpeed * Time.deltaTime);
+            GOTransform.position = Vector3.Slerp(GOTransform.position, steppedPosition, step);
+        }
     }
     
     private void OrbitCam(float xAxis, float yAxis, float step)
@@ -163,20 +170,14 @@ public class PlayerController : MonoBehaviour
         
         Vector3 between = GOTransform.position - CamTransform.position;
         Vector3 desiredPos = GOTransform.position + between.normalized * -CameraDistance;
-        desiredPos.y = CamTransform.position.y;
 
-        if (Physics.Raycast(CamTransform.position, -GOTransform.up, 1.0f))
+        float cameraYMin = (GOTransform.position + GOTransform.up * 2.0f).y;
+        if (desiredPos.y <= cameraYMin)
         {
-            Vector3 newCamPos = CamTransform.position;
-            oldCamPos.x = newCamPos.x;
-            oldCamPos.z = newCamPos.z;
-            CamTransform.position = oldCamPos;
-        }
-        else
-        {
-            CamTransform.position = desiredPos;
+            desiredPos.y = cameraYMin;
         }
 
+        CamTransform.position = desiredPos;
         CamTransform.LookAt(curPos);
     }
     
