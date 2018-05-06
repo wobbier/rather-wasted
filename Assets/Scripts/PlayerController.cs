@@ -325,7 +325,10 @@ public class PlayerController : MonoBehaviour
                 OnMovementEnd.Invoke();
             }
 
-            CameraResetTimer.Start();
+            if (!IsRightStickActive())
+            {
+                CameraResetTimer.Start();
+            }
         }
         // orbit
         if (IsRightStickActive())
@@ -341,12 +344,9 @@ public class PlayerController : MonoBehaviour
                 OrbitCam(xAxisRight, yAxisRight, stepValues.OrbitStep * ControllerSensitivity);
             }
         }
-        else
+        else if (WasRightStickActive() && !IsLeftStickActive())
         {
-            if (WasRightStickActive())
-            {
-                CameraResetTimer.Start();
-            }
+            CameraResetTimer.Start();
         }
     }
 }
