@@ -110,17 +110,16 @@ public class PlayerController : MonoBehaviour
         LeftStickState[1] = Input.GetAxis(LeftStick_HorizontalAxisName) != 0 || Input.GetAxis(LeftStick_VerticalAxisName) != 0;
         RightStickState[1] = Input.GetAxis(RightStick_HorizontalAxisName) != 0 || Input.GetAxis(RightStick_VerticalAxisName) != 0;
         
-        //DoControllerInput(stepValues);
+        DoControllerInput(stepValues);
         DoKeyboardInput(stepValues);
 
         if (bResetCamera)
         {
             TryOrbitReturn(stepValues.OrbitReturnStep);
         }
-        else
+        else if (!IsRightStickActive())
         {
-            if (!IsRightStickActive())
-                CameraTrackPlayer(stepValues);
+            CameraTrackPlayer(stepValues);
         }
     }
 
@@ -286,7 +285,7 @@ public class PlayerController : MonoBehaviour
             
             if (xAxis != 0 || yAxis != 0)
             {
-                OrbitCam(xAxis, yAxis, stepValues.OrbitStep);
+                OrbitCam(xAxis, -yAxis, stepValues.OrbitStep);
             }
         }
     }
