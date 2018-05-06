@@ -769,7 +769,14 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114986360462293772, guid: 59afdc89cdf9e9c4893bc5f94c0a49dd,
+        type: 2}
+      propertyPath: ScoreUpClip
+      value: 
+      objectReference: {fileID: 7400000, guid: ec1ef0cf4a894b246b29ce3910725410, type: 2}
+    m_RemovedComponents:
+    - {fileID: 95467788496582154, guid: 59afdc89cdf9e9c4893bc5f94c0a49dd, type: 2}
+    - {fileID: 95548111823206866, guid: 59afdc89cdf9e9c4893bc5f94c0a49dd, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 59afdc89cdf9e9c4893bc5f94c0a49dd, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &327160329
@@ -3010,6 +3017,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 90.00001, z: 0}
+--- !u!1 &602316455 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1252320171016960, guid: 59afdc89cdf9e9c4893bc5f94c0a49dd,
+    type: 2}
+  m_PrefabInternal: {fileID: 220736855}
+--- !u!95 &602316456
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 602316455}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c2ae63f343e5624eaedb4b0a099e622, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &655047207
 GameObject:
   m_ObjectHideFlags: 0
@@ -7548,6 +7578,29 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
+--- !u!1 &1605070117 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1707138101871974, guid: 59afdc89cdf9e9c4893bc5f94c0a49dd,
+    type: 2}
+  m_PrefabInternal: {fileID: 220736855}
+--- !u!95 &1605070121
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1605070117}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c2ae63f343e5624eaedb4b0a099e622, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1761994301
 GameObject:
   m_ObjectHideFlags: 0

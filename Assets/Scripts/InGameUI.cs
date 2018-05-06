@@ -13,6 +13,7 @@ public class InGameUI : MonoBehaviour
         public void Refresh(GameState.PlayerState playerState)
         {
             ScoreView.text = playerState.Score.ToString();
+            ScoreView.GetComponent<Animator>().Play("ScoreUpAnim");
         }
     }
 
@@ -49,6 +50,7 @@ public class InGameUI : MonoBehaviour
     {
         GameState.PlayerState playerState = GState.GetPlayerState(index);
         PlayerViews[index].Refresh(playerState);
+        
     }
 
     // Update is called once per frame

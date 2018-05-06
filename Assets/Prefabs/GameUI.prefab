@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 224973900923792566}
   - component: {fileID: 222071100623455946}
   - component: {fileID: 114016383351775604}
+  - component: {fileID: 95504650489037068}
   m_Layer: 5
   m_Name: Player1_Score
   m_TagString: Untagged
@@ -91,6 +92,7 @@ GameObject:
   - component: {fileID: 224326822447740252}
   - component: {fileID: 222560332932808442}
   - component: {fileID: 114572099466449908}
+  - component: {fileID: 95111114063321568}
   m_Layer: 5
   m_Name: Player2_Score
   m_TagString: Untagged
@@ -115,6 +117,42 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &95111114063321568
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1707138101871974}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c2ae63f343e5624eaedb4b0a099e622, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!95 &95504650489037068
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1252320171016960}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3c2ae63f343e5624eaedb4b0a099e622, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114009565161786196
 MonoBehaviour:
   m_ObjectHideFlags: 1
