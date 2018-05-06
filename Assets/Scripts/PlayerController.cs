@@ -143,10 +143,10 @@ public class PlayerController : MonoBehaviour
     private void StepMovement(float xAxisVal, float yAxisVal, float step)
     {
         Vector3 scaledCamForward = Vector3.Scale(CamTransform.forward, new Vector3(1, 0, 1));
-        Vector3 desiredForward = IsRightStickActive() ? GOTransform.forward * yAxisVal : scaledCamForward * yAxisVal;
+        Vector3 desiredForward = /*IsRightStickActive() ? GOTransform.forward * yAxisVal :*/ scaledCamForward * yAxisVal;
         Vector3 desiredRight = CamTransform.right * xAxisVal;
 
-        Vector3 steppedPosition = GOTransform.position + (desiredForward + desiredRight);
+        Vector3 steppedPosition = GOTransform.position + (desiredForward + desiredRight).normalized;
         Vector3 newDir = (steppedPosition - GOTransform.position).normalized;
 
         GOTransform.rotation = Quaternion.Slerp(GOTransform.rotation, Quaternion.LookRotation(newDir), RotateSpeed * Time.deltaTime);
