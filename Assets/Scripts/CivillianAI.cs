@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(SphereCollider))]
 public class CivillianAI : MonoBehaviour
 {
     private NavMeshAgent m_nav;
@@ -27,11 +26,4 @@ public class CivillianAI : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "Player")
-        {
-
-        }
-    }
 }
