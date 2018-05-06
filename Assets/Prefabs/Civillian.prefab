@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 114165488715740588}
   m_Layer: 0
   m_Name: Civillian
-  m_TagString: Civillian
+  m_TagString: Civilian
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

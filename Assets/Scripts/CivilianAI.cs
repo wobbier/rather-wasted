@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class CivillianAI : MonoBehaviour
+public class CivilianAI : MonoBehaviour
 {
     private NavMeshAgent m_nav;
     public float NavTimeout = 10;
     private float m_navTimeoutTimer = 0;
+
+    private bool m_isDead = false;
+
+    public bool IsDead() { return m_isDead; }
 
     public Animator SkinAnimator;
     // Use this for initialization
@@ -41,10 +45,14 @@ public class CivillianAI : MonoBehaviour
 
     public void Die()
     {
-        SkinAnimator.StopPlayback();
-        SkinAnimator.Play("run");
-        m_nav.isStopped = true;
-        GetComponent<Collider>().enabled = false;
-        m_nav.enabled = false;
+        if(!m_isDead)
+        {
+            m_isDead = true;
+            SkinAnimator.StopPlayback();
+            SkinAnimator.Play("run");
+            m_nav.isStopped = true;
+            GetComponent<Collider>().enabled = false;
+            m_nav.enabled = false;
+        }
     }
 }

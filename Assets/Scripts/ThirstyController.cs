@@ -84,11 +84,13 @@ public class ThirstyController : PlayerController
 
     private void OnTriggerEnter(Collider other)
     {
-        if (m_state == CharacterState.PrimaryAttack && other.transform.tag == "Civillian")
+        if (m_state == CharacterState.PrimaryAttack && other.transform.tag == "Civilian" && !other.GetComponent<CivilianAI>().IsDead())
         {
             //other.gameObject.GetComponent<Animator>().Play("Death");
             Destroy(other.gameObject, 1);
-            other.gameObject.SetActive(false);
+            other.transform.GetChild(0).localScale = new Vector3(1, 0.2f, 1);
+            //other.gameObject.SetActive(false);
+            other.GetComponent<CivilianAI>().Die();
 
             AttackSuccess();
         }

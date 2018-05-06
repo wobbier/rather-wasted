@@ -6,7 +6,7 @@ public class AIDirector : MonoBehaviour {
 
     public int InitialAmountToSpawn = 5;
 
-    public GameObject Civillian;
+    public GameObject Civilian;
     public float SpawnRate;
 
     private AISpawnPoint[] m_spawnPoints;
@@ -19,7 +19,7 @@ public class AIDirector : MonoBehaviour {
 
         for (int i = 0; i < InitialAmountToSpawn; ++i)
         {
-            Instantiate(Civillian, m_spawnPoints[Random.Range(0, m_spawnPoints.Length)].transform.position, Quaternion.identity);
+            Instantiate(Civilian, m_spawnPoints[Random.Range(0, m_spawnPoints.Length)].transform.position, Quaternion.identity);
         }
         m_spawnTimer = SpawnRate;
     }
@@ -29,7 +29,7 @@ public class AIDirector : MonoBehaviour {
         m_spawnTimer -= Time.deltaTime;
         if(m_spawnTimer < 0)
         {
-            Instantiate(Civillian, m_spawnPoints[Random.Range(0, m_spawnPoints.Length)].transform.position, Quaternion.identity);
+            Instantiate(Civilian, m_spawnPoints[Random.Range(0, m_spawnPoints.Length)].transform.position, Quaternion.identity);
             m_spawnTimer = SpawnRate;
         }
 	}

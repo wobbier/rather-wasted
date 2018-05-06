@@ -84,27 +84,15 @@ public class SharkController : PlayerController
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (m_state == CharacterState.PrimaryAttack && other.transform.tag == "Civillian")
-        {
-            //other.gameObject.GetComponent<Animator>().Play("Death");
-            other.transform.parent = transform;
-            other.transform.localPosition = Vector3.zero;
-            Destroy(other.gameObject, 2);
-            AttackSuccess();
-        }
-    }
-
     private void OnTriggerStay(Collider other)
     {
-        if (m_state == CharacterState.PrimaryAttack && other.transform.tag == "Civillian")
+        if (m_state == CharacterState.PrimaryAttack && other.transform.tag == "Civilian" && !other.GetComponent<CivilianAI>().IsDead())
         {
             //other.gameObject.GetComponent<Animator>().Play("Death");
             other.transform.parent = Mouth;
             other.transform.localPosition = Vector3.zero;
             other.transform.rotation = Quaternion.LookRotation(Vector3.up, -Vector3.right);
-            other.GetComponent<CivillianAI>().Die();
+            other.GetComponent<CivilianAI>().Die();
             Destroy(other.gameObject, 2);
             //other.gameObject.SetActive(false);
             AttackSuccess();
