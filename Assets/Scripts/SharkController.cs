@@ -32,18 +32,21 @@ public class SharkController : PlayerController
 
     private void OnTurn(float x)
     {
-        if (x < 0.4f)
+        if (m_state == CharacterState.Moving)
         {
-            SkinAnimator.CrossFade("TurnLeft", Time.deltaTime * 5.0f);
-        }
-        else if (x > 0.4f)
-        {
-            SkinAnimator.CrossFade("TurnRight", Time.deltaTime * 5.0f);
+            if (x < 0.4f)
+            {
+                SkinAnimator.CrossFade("TurnLeft", 0.3f);
+            }
+            else if (x > 0.4f)
+            {
+                SkinAnimator.CrossFade("TurnRight", 0.3f);
 
-        }
-        else
-        {
-            SkinAnimator.CrossFade("Walk", Time.deltaTime * 5.0f);
+            }
+            else
+            {
+                SkinAnimator.CrossFade("Walk", 0.3f);
+            }
         }
     }
 
@@ -68,7 +71,6 @@ public class SharkController : PlayerController
     {
         if (m_state == CharacterState.Idle)
         {
-            SkinAnimator.Play("Walk");
             m_state = CharacterState.Moving;
         }
     }
