@@ -97,7 +97,20 @@ public class InGameUI : MonoBehaviour
             WinnerView.ScoreView.gameObject.transform.parent.position = Vector3.Lerp(WinnerView.ScoreView.gameObject.transform.parent.position, new Vector3(Screen.width / 2.0f, Screen.height / 2.0f), 2.0f * Time.deltaTime);
             WinnerView.ScoreView.gameObject.transform.parent.localScale = Vector3.Lerp(WinnerView.ScoreView.gameObject.transform.parent.localScale, new Vector3(2.0f, 2.0f), 2.0f * Time.deltaTime);
 
-            LoserView.ScoreView.gameObject.transform.parent.position = Vector3.Lerp(LoserView.ScoreView.gameObject.transform.parent.position, new Vector3((Screen.width / 2.0f) - 200.0f, (Screen.height / 2.0f) + 100.0f), 2.0f * Time.deltaTime);
+            Vector3 screenMid = new Vector3(Screen.width / 2.0f, Screen.height / 2.0f);
+            Vector3 pos = WinnerView.ScoreView.gameObject.transform.parent.position;
+
+            int xMultiplier = -1;
+            if ((screenMid - pos).x < 0)
+            {
+                xMultiplier = 1;
+            }
+
+            int fontSize = WinnerView.ScoreView.fontSize;
+            fontSize = (int)Mathf.Lerp(fontSize, 32.0f, 2.0f);
+            WinnerView.ScoreView.fontSize = fontSize;
+
+            LoserView.ScoreView.gameObject.transform.parent.position = Vector3.Lerp(LoserView.ScoreView.gameObject.transform.parent.position, new Vector3((Screen.width / 2.0f) - (200.0f * xMultiplier), (Screen.height / 2.0f) + 100.0f), 2.0f * Time.deltaTime);
             LoserView.ScoreView.gameObject.transform.parent.localScale = Vector3.Lerp(LoserView.ScoreView.gameObject.transform.parent.localScale, new Vector3(0.75f, 0.75f), 2.0f * Time.deltaTime);
         }
     }

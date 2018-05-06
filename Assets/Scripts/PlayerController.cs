@@ -359,7 +359,7 @@ public class PlayerController : MonoBehaviour
          */
         if (IsLeftStickActive())
         {
-            if (OnMovementBegin != null)
+            if (OnMovementBegin != null && ApplyMovement)
             {
                 OnMovementBegin.Invoke();
             }

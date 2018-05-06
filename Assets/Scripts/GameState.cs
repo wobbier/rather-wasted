@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour
 {
@@ -84,6 +85,18 @@ public class GameState : MonoBehaviour
         {
             EndGame();
         }
+
+        if (CurrentState == EGameState.Ending)
+        {
+            foreach (PlayerState state in PlayerStates)
+            {
+                if (Input.GetButton(state.Controller.PlayerName + "_" + "Start"))
+                {
+                    Debug.Log("test");
+                    SceneManager.LoadScene("Park");
+                }
+            }
+        }
     }
 
     private void EndGame()
@@ -92,7 +105,7 @@ public class GameState : MonoBehaviour
 
         foreach (PlayerState state in PlayerStates)
         {
-            //state.Controller.ApplyMovement = false;
+            state.Controller.ApplyMovement = false;
         }
 
         if (OnGameEnd != null)
