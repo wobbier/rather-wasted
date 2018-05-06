@@ -34,6 +34,71 @@ ModelImporter:
     100056: sharkeyes_low
     100058: sharkteeth1_low
     100060: sharkteeth2_low
+    100062: Box001
+    100064: Box002
+    100066: Box003
+    100068: Box004
+    100070: Box005
+    100072: Box006
+    100074: Box007
+    100076: Civilian
+    100078: Civilian_ClavL
+    100080: Civilian_ClavR
+    100082: Civilian_FootL
+    100084: Civilian_FootR
+    100086: Civilian_ForearmL
+    100088: Civilian_ForearmR
+    100090: Civilian_Head
+    100092: Civilian_LowerlegL
+    100094: Civilian_LowerlegR
+    100096: Civilian_Neck
+    100098: Civilian_pelvis
+    100100: Civilian_Spine1
+    100102: Civilian_Spine2
+    100104: Civilian_ThighL
+    100106: Civilian_ThighR
+    100108: Civilian_UpperarmL
+    100110: Civilian_UpperarmR
+    100112: Civilian_UpperlegL
+    100114: Civilian_UpperlegR
+    100116: Eric's Rage
+    100118: IK Chain001
+    100120: IK Chain002
+    100122: Plane001
+    100124: Plane002
+    100126: Plane003
+    100128: Shark_ClavL
+    100130: Shark_ClavR
+    100132: Shark_Dorsal01
+    100134: Shark_dorsal02
+    100136: Shark_FinL01
+    100138: Shark_FinL02
+    100140: Shark_FinR01
+    100142: Shark_FinR02
+    100144: Shark_Helper01
+    100146: Shark_Helper02
+    100148: Shark_Helper03
+    100150: Shark_Helper04
+    100152: Shark_Helper05
+    100154: Shark_LowerJaw
+    100156: Shark_Nose
+    100158: Shark_Root
+    100160: Shark_Spine01
+    100162: Shark_Spine02
+    100164: Shark_Spine03
+    100166: Shark_Spine04
+    100168: Shark_Tail01
+    100170: Shark_Tail02
+    100172: Shark_Tail03
+    100174: Shark_Tail04
+    100176: Shark_Tail05
+    100178: Shark_UpperJaw
+    100180: Store big
+    100182: Store small
+    100184: Store small001
+    100186: Thirstyboy_Left
+    100188: Thirstyboy_Right
+    100190: Thirstyboybody_low
     400000: //RootNode
     400002: shark_dorsal01
     400004: shark_dorsal02
@@ -65,17 +130,132 @@ ModelImporter:
     400056: sharkeyes_low
     400058: sharkteeth1_low
     400060: sharkteeth2_low
+    400062: Box001
+    400064: Box002
+    400066: Box003
+    400068: Box004
+    400070: Box005
+    400072: Box006
+    400074: Box007
+    400076: Civilian
+    400078: Civilian_ClavL
+    400080: Civilian_ClavR
+    400082: Civilian_FootL
+    400084: Civilian_FootR
+    400086: Civilian_ForearmL
+    400088: Civilian_ForearmR
+    400090: Civilian_Head
+    400092: Civilian_LowerlegL
+    400094: Civilian_LowerlegR
+    400096: Civilian_Neck
+    400098: Civilian_pelvis
+    400100: Civilian_Spine1
+    400102: Civilian_Spine2
+    400104: Civilian_ThighL
+    400106: Civilian_ThighR
+    400108: Civilian_UpperarmL
+    400110: Civilian_UpperarmR
+    400112: Civilian_UpperlegL
+    400114: Civilian_UpperlegR
+    400116: Eric's Rage
+    400118: IK Chain001
+    400120: IK Chain002
+    400122: Plane001
+    400124: Plane002
+    400126: Plane003
+    400128: Shark_ClavL
+    400130: Shark_ClavR
+    400132: Shark_Dorsal01
+    400134: Shark_dorsal02
+    400136: Shark_FinL01
+    400138: Shark_FinL02
+    400140: Shark_FinR01
+    400142: Shark_FinR02
+    400144: Shark_Helper01
+    400146: Shark_Helper02
+    400148: Shark_Helper03
+    400150: Shark_Helper04
+    400152: Shark_Helper05
+    400154: Shark_LowerJaw
+    400156: Shark_Nose
+    400158: Shark_Root
+    400160: Shark_Spine01
+    400162: Shark_Spine02
+    400164: Shark_Spine03
+    400166: Shark_Spine04
+    400168: Shark_Tail01
+    400170: Shark_Tail02
+    400172: Shark_Tail03
+    400174: Shark_Tail04
+    400176: Shark_Tail05
+    400178: Shark_UpperJaw
+    400180: Store big
+    400182: Store small
+    400184: Store small001
+    400186: Thirstyboy_Left
+    400188: Thirstyboy_Right
+    400190: Thirstyboybody_low
     2100000: 'Material #48'
     2100002: shark
+    2100004: No Name
+    2100006: Thirstyboy
+    2300000: Box001
+    2300002: Box002
+    2300004: Box003
+    2300006: Box004
+    2300008: Box005
+    2300010: Box006
+    2300012: Box007
+    2300014: Eric's Rage
+    2300016: Plane001
+    2300018: Plane002
+    2300020: Plane003
+    2300022: Store big
+    2300024: Store small
+    2300026: Store small001
+    2300028: Thirstyboybody_low
+    3300000: Box001
+    3300002: Box002
+    3300004: Box003
+    3300006: Box004
+    3300008: Box005
+    3300010: Box006
+    3300012: Box007
+    3300014: Eric's Rage
+    3300016: Plane001
+    3300018: Plane002
+    3300020: Plane003
+    3300022: Store big
+    3300024: Store small
+    3300026: Store small001
+    3300028: Thirstyboybody_low
     4300000: sharkbody_low
     4300002: sharkeyes_low
     4300004: sharkteeth1_low
     4300006: sharkteeth2_low
+    4300008: Eric's Rage
+    4300010: Civilian
+    4300012: Store small
+    4300014: Plane001
+    4300016: Store big
+    4300018: Store small001
+    4300020: Plane002
+    4300022: Box001
+    4300024: Box002
+    4300026: Box003
+    4300028: Box004
+    4300030: Plane003
+    4300032: Box005
+    4300034: Box006
+    4300036: Box007
+    4300038: Thirstyboybody_low
     9500000: //RootNode
     13700000: sharkbody_low
     13700002: sharkeyes_low
     13700004: sharkteeth1_low
     13700006: sharkteeth2_low
+    13700008: Civilian
+    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -88,7 +268,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: 
+    rigImportErrors: "Avatar creation failed:\n\tCannot find root motion transform
+      'shark_spine01'.\n"
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 

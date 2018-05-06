@@ -1,0 +1,275 @@
+fileFormatVersion: 2
+guid: 0f50a7c3f524b0c4d9872b1755d1f3ed
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Box001
+    100002: Box002
+    100004: Box003
+    100006: Box004
+    100008: Box005
+    100010: Box006
+    100012: Box007
+    100014: Civilian
+    100016: Civilian_ClavL
+    100018: Civilian_ClavR
+    100020: Civilian_FootL
+    100022: Civilian_FootR
+    100024: Civilian_ForearmL
+    100026: Civilian_ForearmR
+    100028: Civilian_Head
+    100030: Civilian_LowerlegL
+    100032: Civilian_LowerlegR
+    100034: Civilian_Neck
+    100036: Civilian_pelvis
+    100038: Civilian_Spine1
+    100040: Civilian_Spine2
+    100042: Civilian_ThighL
+    100044: Civilian_ThighR
+    100046: Civilian_UpperarmL
+    100048: Civilian_UpperarmR
+    100050: Civilian_UpperlegL
+    100052: Civilian_UpperlegR
+    100054: Eric's Rage
+    100056: IK Chain001
+    100058: IK Chain002
+    100060: Plane001
+    100062: Plane002
+    100064: Plane003
+    100066: Shark_ClavL
+    100068: Shark_ClavR
+    100070: Shark_Dorsal01
+    100072: Shark_dorsal02
+    100074: Shark_FinL01
+    100076: Shark_FinL02
+    100078: Shark_FinR01
+    100080: Shark_FinR02
+    100082: Shark_Helper01
+    100084: Shark_Helper02
+    100086: Shark_Helper03
+    100088: Shark_Helper04
+    100090: Shark_Helper05
+    100092: Shark_LowerJaw
+    100094: Shark_Nose
+    100096: Shark_Root
+    100098: Shark_Spine01
+    100100: Shark_Spine02
+    100102: Shark_Spine03
+    100104: Shark_Spine04
+    100106: Shark_Tail01
+    100108: Shark_Tail02
+    100110: Shark_Tail03
+    100112: Shark_Tail04
+    100114: Shark_Tail05
+    100116: Shark_UpperJaw
+    100118: sharkbody_low
+    100120: //RootNode
+    100122: Store big
+    100124: Store small
+    100126: Store small001
+    100128: Thirstyboy_Left
+    100130: Thirstyboy_Right
+    100132: Thirstyboybody_low
+    400000: Box001
+    400002: Box002
+    400004: Box003
+    400006: Box004
+    400008: Box005
+    400010: Box006
+    400012: Box007
+    400014: Civilian
+    400016: Civilian_ClavL
+    400018: Civilian_ClavR
+    400020: Civilian_FootL
+    400022: Civilian_FootR
+    400024: Civilian_ForearmL
+    400026: Civilian_ForearmR
+    400028: Civilian_Head
+    400030: Civilian_LowerlegL
+    400032: Civilian_LowerlegR
+    400034: Civilian_Neck
+    400036: Civilian_pelvis
+    400038: Civilian_Spine1
+    400040: Civilian_Spine2
+    400042: Civilian_ThighL
+    400044: Civilian_ThighR
+    400046: Civilian_UpperarmL
+    400048: Civilian_UpperarmR
+    400050: Civilian_UpperlegL
+    400052: Civilian_UpperlegR
+    400054: Eric's Rage
+    400056: IK Chain001
+    400058: IK Chain002
+    400060: Plane001
+    400062: Plane002
+    400064: Plane003
+    400066: Shark_ClavL
+    400068: Shark_ClavR
+    400070: Shark_Dorsal01
+    400072: Shark_dorsal02
+    400074: Shark_FinL01
+    400076: Shark_FinL02
+    400078: Shark_FinR01
+    400080: Shark_FinR02
+    400082: Shark_Helper01
+    400084: Shark_Helper02
+    400086: Shark_Helper03
+    400088: Shark_Helper04
+    400090: Shark_Helper05
+    400092: Shark_LowerJaw
+    400094: Shark_Nose
+    400096: Shark_Root
+    400098: Shark_Spine01
+    400100: Shark_Spine02
+    400102: Shark_Spine03
+    400104: Shark_Spine04
+    400106: Shark_Tail01
+    400108: Shark_Tail02
+    400110: Shark_Tail03
+    400112: Shark_Tail04
+    400114: Shark_Tail05
+    400116: Shark_UpperJaw
+    400118: sharkbody_low
+    400120: //RootNode
+    400122: Store big
+    400124: Store small
+    400126: Store small001
+    400128: Thirstyboy_Left
+    400130: Thirstyboy_Right
+    400132: Thirstyboybody_low
+    2100000: No Name
+    2100002: Thirstyboy
+    2100004: 'Material #48'
+    2100006: shark
+    2300000: Box001
+    2300002: Box002
+    2300004: Box003
+    2300006: Box004
+    2300008: Box005
+    2300010: Box006
+    2300012: Box007
+    2300014: Eric's Rage
+    2300016: Plane001
+    2300018: Plane002
+    2300020: Plane003
+    2300022: Store big
+    2300024: Store small
+    2300026: Store small001
+    2300028: Thirstyboybody_low
+    3300000: Box001
+    3300002: Box002
+    3300004: Box003
+    3300006: Box004
+    3300008: Box005
+    3300010: Box006
+    3300012: Box007
+    3300014: Eric's Rage
+    3300016: Plane001
+    3300018: Plane002
+    3300020: Plane003
+    3300022: Store big
+    3300024: Store small
+    3300026: Store small001
+    3300028: Thirstyboybody_low
+    4300000: Eric's Rage
+    4300002: Civilian
+    4300004: Store small
+    4300006: Plane001
+    4300008: Store big
+    4300010: Store small001
+    4300012: Plane002
+    4300014: Box001
+    4300016: Box002
+    4300018: Box003
+    4300020: Box004
+    4300022: Plane003
+    4300024: Box005
+    4300026: Box006
+    4300028: Box007
+    4300030: Thirstyboybody_low
+    4300032: sharkbody_low
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Civilian
+    13700002: sharkbody_low
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
