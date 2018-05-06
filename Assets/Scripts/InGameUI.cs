@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
-    struct PlayerView
+    class PlayerView
     {
         public Text ScoreView;
 
@@ -26,7 +26,10 @@ public class InGameUI : MonoBehaviour
     private Canvas GameCanvas;
     private Text TimerText;
 
-    private PlayerView[] PlayerViews = new PlayerView[2];
+    private List<PlayerView> PlayerViews = new List<PlayerView>();
+
+    private PlayerView WinnerView;
+    private PlayerView LoserView;
     #endregion
 
     // Use this for initialization
@@ -37,6 +40,9 @@ public class InGameUI : MonoBehaviour
 
         TimerText = GameObject.Find("GameUI/TimeText").GetComponent<Text>();
 
+        PlayerViews.Add(new PlayerView());
+        PlayerViews.Add(new PlayerView());
+
         PlayerViews[0].ScoreView = GameObject.Find("GameUI/Player1_Frame/Player1_Score").GetComponent<Text>();
         PlayerViews[1].ScoreView = GameObject.Find("GameUI/Player2_Frame/Player2_Score").GetComponent<Text>();
 
@@ -44,13 +50,31 @@ public class InGameUI : MonoBehaviour
         PlayerViews[1].ScoreView.text = GState.GetPlayerState(1).Score.ToString();
 
         GState.OnPlayerStateChanged += OnPlayerStateChanged;
+        GState.OnGameEnd += OnGameEnd;
+    }
+
+    private void OnGameEnd()
+    {
+        TimerText.text = "FINISHED";
+
+        int winnerIdx = GState.FindWinner();
+        bool bIsTie = winnerIdx == -1;
+
+        if (!bIsTie)
+        {
+            WinnerView = PlayerViews[winnerIdx];
+            LoserView = PlayerViews.Find(view => view != WinnerView);
+        }
+        else
+        {
+            TimerText.text = "TIE!";
+        }
     }
 
     private void OnPlayerStateChanged(int index)
     {
         GameState.PlayerState playerState = GState.GetPlayerState(index);
         PlayerViews[index].Refresh(playerState);
-        
     }
 
     // Update is called once per frame
@@ -70,7 +94,11 @@ public class InGameUI : MonoBehaviour
         }
         else
         {
-            TimerText.text = "FINISHED";
+            WinnerView.ScoreView.gameObject.transform.parent.position = Vector3.Lerp(WinnerView.ScoreView.gameObject.transform.parent.position, new Vector3(Screen.width / 2.0f, Screen.height / 2.0f), 2.0f * Time.deltaTime);
+            WinnerView.ScoreView.gameObject.transform.parent.localScale = Vector3.Lerp(WinnerView.ScoreView.gameObject.transform.parent.localScale, new Vector3(2.0f, 2.0f), 2.0f * Time.deltaTime);
+
+            LoserView.ScoreView.gameObject.transform.parent.position = Vector3.Lerp(LoserView.ScoreView.gameObject.transform.parent.position, new Vector3((Screen.width / 2.0f) - 200.0f, (Screen.height / 2.0f) + 100.0f), 2.0f * Time.deltaTime);
+            LoserView.ScoreView.gameObject.transform.parent.localScale = Vector3.Lerp(LoserView.ScoreView.gameObject.transform.parent.localScale, new Vector3(0.75f, 0.75f), 2.0f * Time.deltaTime);
         }
     }
 }

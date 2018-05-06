@@ -26,8 +26,10 @@ public class GameState : MonoBehaviour
 
     #region Public Delegates
     public delegate void PlayerStateChangedDelegate(int index);
+    public delegate void GameFinishedDelegate();
 
     public event PlayerStateChangedDelegate OnPlayerStateChanged;
+    public event GameFinishedDelegate OnGameEnd;
     #endregion
 
     #region Private Members
@@ -80,11 +82,32 @@ public class GameState : MonoBehaviour
         TimeSpan remaining = GetRemaningTime();
         if (remaining.TotalSeconds <= 0)
         {
-            CurrentState = EGameState.Ending;
+            EndGame();
+        }
+    }
+
+    private void EndGame()
+    {
+        CurrentState = EGameState.Ending;
+
+        foreach (PlayerState state in PlayerStates)
+        {
+            //state.Controller.ApplyMovement = false;
+        }
+
+        if (OnGameEnd != null)
+        {
+            OnGameEnd.Invoke();
         }
     }
 
     #region Public Methods
+    public int FindWinner()
+    {
+        int winnerIdx = (PlayerStates[0].Score > PlayerStates[1].Score) ? 0 : 1;
+        return (PlayerStates[0].Score == PlayerStates[1].Score) ? -1 : winnerIdx;
+    }
+
     public TimeSpan GetRemaningTime()
     {
         return EndTime - DateTime.Now;
