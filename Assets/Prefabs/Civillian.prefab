@@ -205,7 +205,6 @@ GameObject:
   - component: {fileID: 195076239219655974}
   - component: {fileID: 114159507923652024}
   - component: {fileID: 114165488715740588}
-  - component: {fileID: 135293813727891448}
   m_Layer: 0
   m_Name: Civillian
   m_TagString: Civillian
@@ -570,7 +569,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1405984999510414}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4.774, z: 0}
+  m_LocalPosition: {x: 0, y: 3.24, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4416452875688810}
@@ -723,7 +722,7 @@ Animator:
   m_GameObject: {fileID: 1236539558447514}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 6ee7c7e1a0988854c846a02d8049c9a2, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9994ae1d7b3c1164481bc66d4754bee5, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -755,18 +754,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NavTimeout: 5
---- !u!135 &135293813727891448
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1405984999510414}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136055919233438002
 CapsuleCollider:
   m_ObjectHideFlags: 1

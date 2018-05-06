@@ -61,12 +61,12 @@ public class SharkController : PlayerController
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(m_state == CharacterState.PrimaryAttack && collision.transform.tag == "Civillian")
+        if(m_state == CharacterState.PrimaryAttack && other.transform.tag == "Civillian")
         {
-            collision.gameObject.GetComponent<Animator>().Play("Death");
-            Destroy(collision.gameObject, 1);
+            //other.gameObject.GetComponent<Animator>().Play("Death");
+            Destroy(other.gameObject, 1);
         }
     }
 
