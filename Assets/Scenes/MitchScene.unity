@@ -8557,16 +8557,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114083291333710972, guid: 9f6cb8c52d9f04a47be3126c0aa24a35,
-        type: 2}
-      propertyPath: InitialAmountToSpawn
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 114083291333710972, guid: 9f6cb8c52d9f04a47be3126c0aa24a35,
-        type: 2}
-      propertyPath: SpawnRate
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f6cb8c52d9f04a47be3126c0aa24a35, type: 2}
   m_IsPrefabParent: 0
