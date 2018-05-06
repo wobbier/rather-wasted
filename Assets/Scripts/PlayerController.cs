@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
         CamTransform.position = GOTransform.position + ((Quaternion.AngleAxis(CameraAngle, CamTransform.right) * GOTransform.forward) * -CameraDistance);
         CamTransform.LookAt(GOTransform);
 
-        CameraResetTimer = new Timer(500);
+        CameraResetTimer = new Timer(1000);
         CameraResetTimer.Elapsed += OnCameraResetTimerElapsed;
     }
 
@@ -141,7 +141,8 @@ public class PlayerController : MonoBehaviour
 
     private void StepMovement(float xAxisVal, float yAxisVal, float step)
     {
-        Vector3 desiredForward = CamTransform.forward * yAxisVal;
+        Vector3 scaledCamForward = Vector3.Scale(CamTransform.forward, new Vector3(1, 0, 1));
+        Vector3 desiredForward = scaledCamForward * yAxisVal;
         Vector3 desiredRight = CamTransform.right * xAxisVal;
 
         Vector3 steppedPosition = GOTransform.position + (desiredForward + desiredRight);
@@ -195,10 +196,11 @@ public class PlayerController : MonoBehaviour
 
         Vector3 between = GOTransform.position - CamTransform.position;
         Vector3 desiredPos = GOTransform.position + between.normalized * -CameraDistance;
+        desiredPos.y = CamTransform.position.y;
         
         if (!IsRightStickActive())
         {
-            CamTransform.position = Vector3.Slerp(CamTransform.position, desiredPos, 0.0075f);
+            CamTransform.position = Vector3.Slerp(CamTransform.position, desiredPos, 0.075f);
         }
     }
 
@@ -276,10 +278,6 @@ public class PlayerController : MonoBehaviour
                 OrbitCam(xAxis, yAxis, stepValues.OrbitStep);
             }
         }
-        else
-        {
-            //TryOrbitReturn(stepValues.OrbitReturnStep);
-        }
     }
 
     private void DoControllerInput(StepValues stepValues)
@@ -335,7 +333,6 @@ public class PlayerController : MonoBehaviour
             {
                 CameraResetTimer.Start();
             }
-            //TryOrbitReturn(stepValues.OrbitReturnStep);
         }
     }
 }

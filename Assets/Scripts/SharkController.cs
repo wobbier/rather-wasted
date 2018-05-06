@@ -20,12 +20,12 @@ public class SharkController : PlayerController
 
     private void Awake()
     {
-        OnMovementStep += OnMove;
+        OnMovementBegin += OnMove;
         SkinAnimator.Play("Idle");
         m_state = CharacterState.Idle;
     }
 
-    private void OnMove(float val)
+    private void OnMove()
     {
         if(m_state == CharacterState.Idle)
         {
