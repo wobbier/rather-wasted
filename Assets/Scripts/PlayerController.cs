@@ -164,19 +164,24 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 curPos = GOTransform.position;
         Vector3 oldCamPos = ChildCamera.transform.position;
-
-        CamTransform.RotateAround(curPos, GOTransform.right, step * -yAxis);
-        CamTransform.RotateAround(curPos, GOTransform.up, step * xAxis);
         
+        CamTransform.RotateAround(curPos, CamTransform.right, step * -yAxis);
+        CamTransform.RotateAround(curPos, CamTransform.up, step * xAxis);
+
         Vector3 between = GOTransform.position - CamTransform.position;
         Vector3 desiredPos = GOTransform.position + between.normalized * -CameraDistance;
 
         float cameraYMin = (GOTransform.position + GOTransform.up * 2.0f).y;
-        if (desiredPos.y <= cameraYMin)
+        float cameraYMax = (GOTransform.position + GOTransform.up * 8.0f).y;
+        if (desiredPos.y < cameraYMin)
         {
             desiredPos.y = cameraYMin;
         }
-
+        if (desiredPos.y > cameraYMax)
+        {
+            desiredPos.y = cameraYMax;
+        }
+        
         CamTransform.position = desiredPos;
         CamTransform.LookAt(curPos);
     }
