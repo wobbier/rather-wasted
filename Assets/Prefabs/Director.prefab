@@ -53,4 +53,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitialAmountToSpawn: 20
   Civillian: {fileID: 1405984999510414, guid: a02131c0122ee3a469877caf55480a80, type: 2}
-  SpawnRate: 5
+  SpawnRate: 1
