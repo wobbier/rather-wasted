@@ -420,17 +420,27 @@ Prefab:
     - target: {fileID: 114226531164755636, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
         type: 2}
       propertyPath: RotateSpeed
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114226531164755636, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
         type: 2}
       propertyPath: CameraDistance
-      value: 8
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114226531164755636, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
         type: 2}
       propertyPath: CameraAngle
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 114226531164755636, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
+        type: 2}
+      propertyPath: OrbitSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114226531164755636, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
+        type: 2}
+      propertyPath: ControllerSensitivity
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 33422476174963854, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b, type: 2}

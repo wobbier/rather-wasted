@@ -115,7 +115,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            CameraTrackPlayer(stepValues);
+            if (!IsRightStickActive())
+                CameraTrackPlayer(stepValues);
         }
     }
 
@@ -142,7 +143,7 @@ public class PlayerController : MonoBehaviour
     private void StepMovement(float xAxisVal, float yAxisVal, float step)
     {
         Vector3 scaledCamForward = Vector3.Scale(CamTransform.forward, new Vector3(1, 0, 1));
-        Vector3 desiredForward = scaledCamForward * yAxisVal;
+        Vector3 desiredForward = IsRightStickActive() ? GOTransform.forward * yAxisVal : scaledCamForward * yAxisVal;
         Vector3 desiredRight = CamTransform.right * xAxisVal;
 
         Vector3 steppedPosition = GOTransform.position + (desiredForward + desiredRight);
@@ -157,16 +158,23 @@ public class PlayerController : MonoBehaviour
         Vector3 curPos = GOTransform.position;
         Vector3 oldCamPos = ChildCamera.transform.position;
 
-        CamTransform.RotateAround(curPos, Vector3.right, step * yAxis);
-        CamTransform.RotateAround(curPos, Vector3.up, step * xAxis);
-
-        Vector3 newCamPos = CamTransform.position;
+        CamTransform.RotateAround(curPos, GOTransform.right, step * -yAxis);
+        CamTransform.RotateAround(curPos, GOTransform.up, step * xAxis);
+        
+        Vector3 between = GOTransform.position - CamTransform.position;
+        Vector3 desiredPos = GOTransform.position + between.normalized * -CameraDistance;
+        desiredPos.y = CamTransform.position.y;
 
         if (Physics.Raycast(CamTransform.position, -GOTransform.up, 1.0f))
         {
+            Vector3 newCamPos = CamTransform.position;
             oldCamPos.x = newCamPos.x;
             oldCamPos.z = newCamPos.z;
             CamTransform.position = oldCamPos;
+        }
+        else
+        {
+            CamTransform.position = desiredPos;
         }
 
         CamTransform.LookAt(curPos);
@@ -192,16 +200,13 @@ public class PlayerController : MonoBehaviour
 
     private void CameraTrackPlayer(StepValues stepValues)
     {
-        CamTransform.LookAt(GOTransform);
+        Vector3 between = CamTransform.position - GOTransform.position;
+        Vector3 desiredPos = GOTransform.position + between.normalized * CameraDistance;
 
-        Vector3 between = GOTransform.position - CamTransform.position;
-        Vector3 desiredPos = GOTransform.position + between.normalized * -CameraDistance;
         desiredPos.y = CamTransform.position.y;
-        
-        if (!IsRightStickActive())
-        {
-            CamTransform.position = Vector3.Slerp(CamTransform.position, desiredPos, 0.075f);
-        }
+
+        CamTransform.position = Vector3.Slerp(CamTransform.position, desiredPos, 0.075f);
+        CamTransform.LookAt(GOTransform);
     }
 
     private void DoKeyboardInput(StepValues stepValues)
@@ -325,7 +330,10 @@ public class PlayerController : MonoBehaviour
                 bResetCamera = false;
             }
 
-            OrbitCam(xAxisRight, yAxisRight, stepValues.OrbitStep * ControllerSensitivity);
+            //if (!IsLeftStickActive())
+            {
+                OrbitCam(xAxisRight, yAxisRight, stepValues.OrbitStep * ControllerSensitivity);
+            }
         }
         else
         {
