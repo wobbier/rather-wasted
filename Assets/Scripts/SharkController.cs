@@ -21,13 +21,24 @@ public class SharkController : PlayerController
     private void Awake()
     {
         OnMovementBegin += OnMove;
+        OnMovementEnd += OnStop;
         SkinAnimator.Play("Idle");
         m_state = CharacterState.Idle;
     }
 
+    private void OnStop()
+    {
+        if (m_state != CharacterState.PrimaryAttack || m_state == CharacterState.Idle)
+        {
+            SkinAnimator.StopPlayback();
+            SkinAnimator.Play("Idle");
+            m_state = CharacterState.Idle;
+        }
+    }
+
     private void OnMove()
     {
-        if(m_state == CharacterState.Idle)
+        if (m_state == CharacterState.Idle)
         {
             SkinAnimator.Play("Walk");
             m_state = CharacterState.Moving;
@@ -38,6 +49,7 @@ public class SharkController : PlayerController
     {
         m_state = CharacterState.PrimaryAttack;
         SkinAnimator.Play("Slam");
+        ApplyMovement = false;
     }
 
     public void LateUpdate()
@@ -47,6 +59,7 @@ public class SharkController : PlayerController
             if (SkinAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
             {
                 m_state = CharacterState.Idle;
+                ApplyMovement = true;
             }
             return;
         }
@@ -67,6 +80,7 @@ public class SharkController : PlayerController
         {
             //other.gameObject.GetComponent<Animator>().Play("Death");
             Destroy(other.gameObject, 1);
+            other.gameObject.SetActive(false);
         }
     }
 
