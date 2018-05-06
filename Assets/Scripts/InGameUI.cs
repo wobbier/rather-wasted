@@ -80,7 +80,19 @@ public class InGameUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GState.CurrentState != GameState.EGameState.Ending)
+        if (GState.CurrentState == GameState.EGameState.Beginning)
+        {
+            TimeSpan timeRemaining = GState.GetCountDownRemaining();
+
+            int minutes = timeRemaining.Minutes;
+            int seconds = timeRemaining.Seconds;
+
+            string minutesString = minutes.ToString();
+            string secondsString = seconds.ToString("D2");
+
+            TimerText.text = minutesString + ":" + secondsString;
+        }
+        else if (GState.CurrentState == GameState.EGameState.Playing)
         {
             TimeSpan timeRemaining = GState.GetRemaningTime();
 
@@ -92,7 +104,7 @@ public class InGameUI : MonoBehaviour
 
             TimerText.text = minutesString + ":" + secondsString;
         }
-        else
+        else if (GState.CurrentState == GameState.EGameState.Ending)
         {
             WinnerView.ScoreView.gameObject.transform.parent.position = Vector3.Lerp(WinnerView.ScoreView.gameObject.transform.parent.position, new Vector3(Screen.width / 2.0f, Screen.height / 2.0f), 2.0f * Time.deltaTime);
             WinnerView.ScoreView.gameObject.transform.parent.localScale = Vector3.Lerp(WinnerView.ScoreView.gameObject.transform.parent.localScale, new Vector3(2.0f, 2.0f), 2.0f * Time.deltaTime);

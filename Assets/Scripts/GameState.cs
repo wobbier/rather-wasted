@@ -8,6 +8,7 @@ public class GameState : MonoBehaviour
 {
     public enum EGameState
     {
+        Beginning,
         Playing,
         Ending
     }
@@ -35,12 +36,14 @@ public class GameState : MonoBehaviour
 
     #region Private Members
     private DateTime EndTime;
+    private DateTime CountDownEndTime;
 
     private PlayerState[] PlayerStates = new PlayerState[2];
     #endregion
 
     #region Public Members
     public GameDuration PlayDuration;
+    public GameDuration CountDownDuration;
 
     public EGameState CurrentState;
     #endregion
@@ -49,12 +52,18 @@ public class GameState : MonoBehaviour
     void Start()
     {
         EndTime = DateTime.Now.AddMinutes(PlayDuration.minutes).AddSeconds(PlayDuration.seconds);
+        CountDownEndTime = DateTime.Now.AddMinutes(CountDownDuration.minutes).AddSeconds(CountDownDuration.seconds);
 
         PlayerStates[0].Controller = FindObjectsOfType<PlayerController>()[1];
         PlayerStates[1].Controller = FindObjectsOfType<PlayerController>()[0];
 
         PlayerStates[0].Controller.OnAttackSuccess += Player1_AttackSuccess;
         PlayerStates[1].Controller.OnAttackSuccess += Player2_AttackSuccess;
+
+        foreach (PlayerState state in PlayerStates)
+        {
+            state.Controller.ApplyMovement = false;
+        }
     }
 
     private void Player2_AttackSuccess()
@@ -80,10 +89,22 @@ public class GameState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TimeSpan remaining = GetRemaningTime();
-        if (remaining.TotalSeconds <= 0)
+        if (CurrentState == EGameState.Beginning)
         {
-            EndGame();
+            TimeSpan remaining = GetCountDownRemaining();
+            if (remaining.TotalSeconds <= 0)
+            {
+                BeginGame();
+            }
+        }
+
+        if (CurrentState == EGameState.Playing)
+        {
+            TimeSpan remaining = GetRemaningTime();
+            if (remaining.TotalSeconds <= 0)
+            {
+                EndGame();
+            }
         }
 
         if (CurrentState == EGameState.Ending)
@@ -96,6 +117,18 @@ public class GameState : MonoBehaviour
                     SceneManager.LoadScene("Park");
                 }
             }
+        }
+    }
+
+    private void BeginGame()
+    {
+        CurrentState = EGameState.Playing;
+
+        EndTime = DateTime.Now.AddMinutes(PlayDuration.minutes).AddSeconds(PlayDuration.seconds);
+
+        foreach (PlayerState state in PlayerStates)
+        {
+            state.Controller.ApplyMovement = true;
         }
     }
 
@@ -121,6 +154,11 @@ public class GameState : MonoBehaviour
         return (PlayerStates[0].Score == PlayerStates[1].Score) ? -1 : winnerIdx;
     }
 
+    public TimeSpan GetCountDownRemaining()
+    {
+        return CountDownEndTime - DateTime.Now;
+    }
+
     public TimeSpan GetRemaningTime()
     {
         return EndTime - DateTime.Now;
@@ -136,5 +174,6 @@ public class GameState : MonoBehaviour
 
         return PlayerStates[index];
     }
+
     #endregion
 }
