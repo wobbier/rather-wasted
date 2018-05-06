@@ -25,8 +25,26 @@ public class SharkController : PlayerController
         OnMovementBegin += OnMove;
         OnMovementEnd += OnStop;
         OnMainAbility += OnPrimaryAttack;
+        OnRotationBegin += OnTurn;
         SkinAnimator.Play("Idle");
         m_state = CharacterState.Idle;
+    }
+
+    private void OnTurn(float x)
+    {
+        if (x < 0.4f)
+        {
+            SkinAnimator.CrossFade("TurnLeft", Time.deltaTime * 5.0f);
+        }
+        else if (x > 0.4f)
+        {
+            SkinAnimator.CrossFade("TurnRight", Time.deltaTime * 5.0f);
+
+        }
+        else
+        {
+            SkinAnimator.CrossFade("Walk", Time.deltaTime * 5.0f);
+        }
     }
 
     private void OnPrimaryAttack()

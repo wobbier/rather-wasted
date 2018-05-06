@@ -13,6 +13,8 @@ public class ThirstyController : PlayerController
         Recovery
     }
 
+    public AudioClip AttackSound;
+
     private CharacterState m_state;
     private CharacterState m_previousState;
 
@@ -32,6 +34,7 @@ public class ThirstyController : PlayerController
         m_state = CharacterState.PrimaryAttack;
         SkinAnimator.Play("Slam");
         ApplyMovement = false;
+        GetComponent<AudioSource>().Play();
     }
 
     private void OnStop()
