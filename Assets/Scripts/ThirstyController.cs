@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SharkController : PlayerController
+public class ThirstyController : PlayerController
 {
     private enum CharacterState
     {
