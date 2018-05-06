@@ -5,6 +5,12 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour
 {
+    public enum EGameState
+    {
+        Playing,
+        Ending
+    }
+
     [System.Serializable]
     public struct GameDuration
     {
@@ -18,6 +24,8 @@ public class GameState : MonoBehaviour
 
     #region Public Members
     public GameDuration PlayDuration;
+
+    public EGameState CurrentState;
     #endregion
 
     // Use this for initialization
@@ -30,7 +38,10 @@ public class GameState : MonoBehaviour
     void Update()
     {
         TimeSpan remaining = GetRemaningTime();
-        Debug.Log(remaining);
+        if (remaining.TotalSeconds <= 0)
+        {
+            CurrentState = EGameState.Ending;
+        }
     }
 
     #region Public Methods
