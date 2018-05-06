@@ -769,16 +769,6 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114016383351775604, guid: 59afdc89cdf9e9c4893bc5f94c0a49dd,
-        type: 2}
-      propertyPath: m_Text
-      value: 420
-      objectReference: {fileID: 0}
-    - target: {fileID: 114572099466449908, guid: 59afdc89cdf9e9c4893bc5f94c0a49dd,
-        type: 2}
-      propertyPath: m_Text
-      value: 420
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 59afdc89cdf9e9c4893bc5f94c0a49dd, type: 2}
   m_IsPrefabParent: 0
@@ -3776,8 +3766,8 @@ MonoBehaviour:
   m_Script: {fileID: 1077351063, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: HorizontalLeft
-  m_VerticalAxis: VerticalLeft
+  m_HorizontalAxis: P1_LeftX
+  m_VerticalAxis: P1_LeftY
   m_SubmitButton: Submit
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
@@ -6341,6 +6331,11 @@ Prefab:
       propertyPath: ChildCamera
       value: 
       objectReference: {fileID: 1416549003}
+    - target: {fileID: 114178684045164982, guid: 275e187fc7a503a42ae45032e50f37d4,
+        type: 2}
+      propertyPath: PlayerName
+      value: P1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114848532061705678, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
@@ -6827,6 +6822,11 @@ Prefab:
       propertyPath: ChildCamera
       value: 
       objectReference: {fileID: 1912801131}
+    - target: {fileID: 114226531164755636, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
+        type: 2}
+      propertyPath: PlayerName
+      value: P2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b, type: 2}
   m_IsPrefabParent: 0
