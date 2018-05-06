@@ -25,17 +25,16 @@ public class PlayerController : MonoBehaviour
     #region Private Delegate Declarations
     public delegate void MovementBeginDelegate();
     public delegate void MovementEndDelegate();
-
-    //public delegate void MashDelegate();
-    public delegate void AttackDelegate();
+    
+    public delegate void AbilityButtonDelegate();
     #endregion
 
     #region Public Events
     public event MovementBeginDelegate OnMovementBegin;
     public event MovementEndDelegate OnMovementEnd;
-
-    //public event MashDelegate OnMash;
-    public event AttackDelegate OnAttack;
+    
+    public event AbilityButtonDelegate OnMainAbility;
+    public event AbilityButtonDelegate OnSecondaryAbility;
     #endregion
 
     #region Public Movement Members
@@ -75,6 +74,8 @@ public class PlayerController : MonoBehaviour
     #region Controller State
     BitArray LeftStickState = new BitArray(2, false);
     BitArray RightStickState = new BitArray(2, false);
+    BitArray MainAbilityButtonState = new BitArray(2, false);
+    BitArray SecondaryAbilityButtonState = new BitArray(2, false);
     #endregion
 
     // Use this for initialization
@@ -107,8 +108,14 @@ public class PlayerController : MonoBehaviour
         LeftStickState[0] = LeftStickState[1];
         RightStickState[0] = RightStickState[1];
 
+        MainAbilityButtonState[0] = MainAbilityButtonState[1];
+        SecondaryAbilityButtonState[0] = SecondaryAbilityButtonState[1];
+
         LeftStickState[1] = Input.GetAxis(LeftStick_HorizontalAxisName) != 0 || Input.GetAxis(LeftStick_VerticalAxisName) != 0;
         RightStickState[1] = Input.GetAxis(RightStick_HorizontalAxisName) != 0 || Input.GetAxis(RightStick_VerticalAxisName) != 0;
+
+        MainAbilityButtonState[1] = Input.GetButton("MainAbility");
+        SecondaryAbilityButtonState[1] = Input.GetButton("SecondaryAbility");
         
         DoControllerInput(stepValues);
         DoKeyboardInput(stepValues);
@@ -141,6 +148,26 @@ public class PlayerController : MonoBehaviour
     private bool WasLeftStickActive()
     {
         return LeftStickState[0];
+    }
+
+    private bool IsMainAbilityButtonActive()
+    {
+        return MainAbilityButtonState[1];
+    }
+
+    private bool WasMainAbilityButtonActive()
+    {
+        return MainAbilityButtonState[0];
+    }
+
+    private bool IsSecondaryAbilityButtonActive()
+    {
+        return MainAbilityButtonState[1];
+    }
+
+    private bool WasSecondaryAbilityButtonActive()
+    {
+        return MainAbilityButtonState[0];
     }
 
     private void StepMovement(float xAxisVal, float yAxisVal, float step)
@@ -298,7 +325,7 @@ public class PlayerController : MonoBehaviour
         // Right stick
         float yAxisRight = Input.GetAxis(RightStick_VerticalAxisName);
         float xAxisRight = Input.GetAxis(RightStick_HorizontalAxisName);
-
+        
         Vector3 curPos = gameObject.transform.position;
 
         /*
@@ -346,6 +373,22 @@ public class PlayerController : MonoBehaviour
         else if (WasRightStickActive() && !IsLeftStickActive())
         {
             CameraResetTimer.Start();
+        }
+        
+        if (IsMainAbilityButtonActive() && !WasMainAbilityButtonActive())
+        {
+            if (OnMainAbility != null)
+            {
+                OnMainAbility.Invoke();
+            }
+        }
+
+        if (IsSecondaryAbilityButtonActive() && !WasSecondaryAbilityButtonActive())
+        {
+            if (OnSecondaryAbility != null)
+            {
+                OnSecondaryAbility.Invoke();
+            }
         }
     }
 }
