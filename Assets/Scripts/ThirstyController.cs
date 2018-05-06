@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SharkController : PlayerController
+public class ThirstyController : PlayerController
 {
     private enum CharacterState
     {
@@ -18,8 +18,6 @@ public class SharkController : PlayerController
 
     public Animator SkinAnimator;
 
-    public Transform Mouth;
-
     private void Awake()
     {
         OnMovementBegin += OnMove;
@@ -32,7 +30,7 @@ public class SharkController : PlayerController
     private void OnPrimaryAttack()
     {
         m_state = CharacterState.PrimaryAttack;
-        SkinAnimator.Play("Bite");
+        SkinAnimator.Play("Slam");
         ApplyMovement = false;
     }
 
@@ -59,7 +57,7 @@ public class SharkController : PlayerController
     {
         if (m_state == CharacterState.PrimaryAttack)
         {
-            if (SkinAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            if (SkinAnimator.GetCurrentAnimatorStateInfo(0).IsName("SlamRecovery"))
             {
                 m_state = CharacterState.Idle;
                 SkinAnimator.Play("Idle");
@@ -89,24 +87,9 @@ public class SharkController : PlayerController
         if (m_state == CharacterState.PrimaryAttack && other.transform.tag == "Civillian")
         {
             //other.gameObject.GetComponent<Animator>().Play("Death");
-            other.transform.parent = transform;
-            other.transform.localPosition = Vector3.zero;
-            Destroy(other.gameObject, 2);
-            AttackSuccess();
-        }
-    }
+            Destroy(other.gameObject, 1);
+            other.gameObject.SetActive(false);
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (m_state == CharacterState.PrimaryAttack && other.transform.tag == "Civillian")
-        {
-            //other.gameObject.GetComponent<Animator>().Play("Death");
-            other.transform.parent = Mouth;
-            other.transform.localPosition = Vector3.zero;
-            other.transform.rotation = Quaternion.identity;
-            other.GetComponent<CivillianAI>().Die();
-            Destroy(other.gameObject, 2);
-            //other.gameObject.SetActive(false);
             AttackSuccess();
         }
     }

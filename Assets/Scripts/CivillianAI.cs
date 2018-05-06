@@ -38,4 +38,12 @@ public class CivillianAI : MonoBehaviour
         }
     }
 
+
+    public void Die()
+    {
+        SkinAnimator.Play("idle");
+        m_nav.isStopped = true;
+        GetComponent<Collider>().enabled = false;
+        m_nav.enabled = false;
+    }
 }

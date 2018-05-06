@@ -6,35 +6,42 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     #region Constants
-    private string LeftStick_HorizontalAxisName = "HorizontalLeft";
-    private string LeftStick_VerticalAxisName = "VerticalLeft";
-    private string RightStick_HorizontalAxisName = "HorizontalRight";
-    private string RightStick_VerticalAxisName = "VerticalRight";
-    private string LeftStick_PoliticalStance = "Radical";
-    private string RightStick_PoliticalStance = "Radical";
+    public const string LeftStick_HorizontalAxisName = "LeftX";
+    public const string LeftStick_VerticalAxisName = "LeftY";
+    public const string RightStick_HorizontalAxisName = "RightX";
+    public const string RightStick_VerticalAxisName = "RightY";
+    public const string MainAbilityButtonName = "MainAbility";
+    public const string SecondaryAbilityButtonName = "SecondaryAbility";
+    public const string LeftStick_PoliticalStance = "Radical";
+    public const string RightStick_PoliticalStance = "Radical";
     #endregion
 
     #region Public Members
     public Camera ChildCamera;
 
+    public string PlayerName;
     public int ControllerIdx;
-
     public bool ApplyMovement = true;
     #endregion
 
     #region Private Delegate Declarations
     public delegate void MovementBeginDelegate();
     public delegate void MovementEndDelegate();
-    
-    public delegate void AbilityButtonDelegate();
+
+    public delegate void MainAbilityButtonDelegate();
+    public delegate void SecondaryAbilityButtonDelegate();
+
+    public delegate void AttackSuccessDelegate();
     #endregion
 
     #region Public Events
     public event MovementBeginDelegate OnMovementBegin;
     public event MovementEndDelegate OnMovementEnd;
     
-    public event AbilityButtonDelegate OnMainAbility;
-    public event AbilityButtonDelegate OnSecondaryAbility;
+    public event MainAbilityButtonDelegate OnMainAbility;
+    public event SecondaryAbilityButtonDelegate OnSecondaryAbility;
+
+    public event AttackSuccessDelegate OnAttackSuccess;
     #endregion
 
     #region Public Movement Members
@@ -111,11 +118,11 @@ public class PlayerController : MonoBehaviour
         MainAbilityButtonState[0] = MainAbilityButtonState[1];
         SecondaryAbilityButtonState[0] = SecondaryAbilityButtonState[1];
 
-        LeftStickState[1] = Input.GetAxis(LeftStick_HorizontalAxisName) != 0 || Input.GetAxis(LeftStick_VerticalAxisName) != 0;
-        RightStickState[1] = Input.GetAxis(RightStick_HorizontalAxisName) != 0 || Input.GetAxis(RightStick_VerticalAxisName) != 0;
+        LeftStickState[1] = Input.GetAxis(PlayerName + "_" + LeftStick_HorizontalAxisName) != 0 || Input.GetAxis(PlayerName + "_" + LeftStick_VerticalAxisName) != 0;
+        RightStickState[1] = Input.GetAxis(PlayerName + "_" + RightStick_HorizontalAxisName) != 0 || Input.GetAxis(PlayerName + "_" + RightStick_VerticalAxisName) != 0;
 
-        MainAbilityButtonState[1] = Input.GetButton("MainAbility");
-        SecondaryAbilityButtonState[1] = Input.GetButton("SecondaryAbility");
+        MainAbilityButtonState[1] = Input.GetButton(PlayerName + "_" + MainAbilityButtonName);
+        SecondaryAbilityButtonState[1] = Input.GetButton(PlayerName + "_" + SecondaryAbilityButtonName);
         
         DoControllerInput(stepValues);
         DoKeyboardInput(stepValues);
@@ -198,7 +205,7 @@ public class PlayerController : MonoBehaviour
         Vector3 desiredPos = GOTransform.position + between.normalized * -CameraDistance;
 
         float cameraYMin = (GOTransform.position + GOTransform.up * 2.0f).y;
-        float cameraYMax = (GOTransform.position + GOTransform.up * 8.0f).y;
+        float cameraYMax = (GOTransform.position + GOTransform.up * 12.0f).y;
         if (desiredPos.y < cameraYMin)
         {
             desiredPos.y = cameraYMin;
@@ -327,11 +334,11 @@ public class PlayerController : MonoBehaviour
     private void DoControllerInput(StepValues stepValues)
     {
         // Left stick
-        float yAxisLeft = Input.GetAxis(LeftStick_VerticalAxisName);
-        float xAxisLeft = Input.GetAxis(LeftStick_HorizontalAxisName);
+        float yAxisLeft = Input.GetAxis(PlayerName + "_" + LeftStick_VerticalAxisName);
+        float xAxisLeft = Input.GetAxis(PlayerName + "_" + LeftStick_HorizontalAxisName);
         // Right stick
-        float yAxisRight = Input.GetAxis(RightStick_VerticalAxisName);
-        float xAxisRight = Input.GetAxis(RightStick_HorizontalAxisName);
+        float yAxisRight = Input.GetAxis(PlayerName + "_" + RightStick_VerticalAxisName);
+        float xAxisRight = Input.GetAxis(PlayerName + "_" + RightStick_HorizontalAxisName);
         
         Vector3 curPos = gameObject.transform.position;
 
@@ -396,6 +403,14 @@ public class PlayerController : MonoBehaviour
             {
                 OnSecondaryAbility.Invoke();
             }
+        }
+    }
+
+    protected void AttackSuccess()
+    {
+        if (OnAttackSuccess != null)
+        {
+            OnAttackSuccess.Invoke();
         }
     }
 }
