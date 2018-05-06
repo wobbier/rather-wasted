@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Timers;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,16 +19,16 @@ public class PlayerController : MonoBehaviour
     #endregion
 
     #region Private Delegate Declarations
-    public delegate void MovementStepDelegate(float val);
-    public delegate void MovementRotateDelegate(float val);
+    public delegate void MovementBeginDelegate();
+    public delegate void MovementEndDelegate();
 
     //public delegate void MashDelegate();
     public delegate void AttackDelegate();
     #endregion
 
     #region Public Events
-    public event MovementStepDelegate OnMovementStep;
-    public event MovementRotateDelegate OnMovementRotate;
+    public event MovementBeginDelegate OnMovementBegin;
+    public event MovementEndDelegate OnMovementEnd;
 
     //public event MashDelegate OnMash;
     public event AttackDelegate OnAttack;
@@ -61,6 +62,10 @@ public class PlayerController : MonoBehaviour
     #region Private Members
     private Transform GOTransform;
     private Transform CamTransform;
+
+    private Timer CameraResetTimer;
+
+    private bool bResetCamera = false;
     #endregion
 
     #region Controller State
@@ -73,6 +78,17 @@ public class PlayerController : MonoBehaviour
     {
         GOTransform = gameObject.transform;
         CamTransform = ChildCamera.transform;
+
+        CamTransform.position = GOTransform.position + ((Quaternion.AngleAxis(CameraAngle, CamTransform.right) * GOTransform.forward) * -CameraDistance);
+        CamTransform.LookAt(GOTransform);
+
+        CameraResetTimer = new Timer(500);
+        CameraResetTimer.Elapsed += OnCameraResetTimerElapsed;
+    }
+
+    private void OnCameraResetTimerElapsed(object sender, ElapsedEventArgs e)
+    {
+        bResetCamera = true;
     }
 
     // Update is called once per frame
@@ -83,19 +99,24 @@ public class PlayerController : MonoBehaviour
         stepValues.RotStep               = RotateSpeed * Time.deltaTime;
         stepValues.OrbitStep             = OrbitSpeed * Time.deltaTime;
         stepValues.OrbitReturnStep       = OrbitReturnSpeed * Time.deltaTime;
-
-        //DoKeyboardInput(stepValues);
-
+        
         LeftStickState[0] = LeftStickState[1];
         RightStickState[0] = RightStickState[1];
 
         LeftStickState[1] = Input.GetAxis(LeftStick_HorizontalAxisName) != 0 || Input.GetAxis(LeftStick_VerticalAxisName) != 0;
         RightStickState[1] = Input.GetAxis(RightStick_HorizontalAxisName) != 0 || Input.GetAxis(RightStick_VerticalAxisName) != 0;
-
-        Debug.Log(LeftStickState[0] + "     " + LeftStickState[1]);
-
+        
         DoControllerInput(stepValues);
         //DoKeyboardInput(stepValues);
+
+        if (bResetCamera)
+        {
+            TryOrbitReturn(stepValues.OrbitReturnStep);
+        }
+        else
+        {
+            CameraTrackPlayer(stepValues);
+        }
     }
 
     private bool IsRightStickActive()
@@ -120,13 +141,8 @@ public class PlayerController : MonoBehaviour
 
     private void StepMovement(float xAxisVal, float yAxisVal, float step)
     {
-        if (OnMovementStep != null)
-        {
-            OnMovementStep.Invoke(step);
-        }
-        
-        Vector3 desiredForward = GOTransform.forward * yAxisVal;
-        Vector3 desiredRight = GOTransform.right * xAxisVal;
+        Vector3 desiredForward = CamTransform.forward * yAxisVal;
+        Vector3 desiredRight = CamTransform.right * xAxisVal;
 
         Vector3 steppedPosition = GOTransform.position + (desiredForward + desiredRight);
         Vector3 newDir = (steppedPosition - GOTransform.position).normalized;
@@ -140,32 +156,19 @@ public class PlayerController : MonoBehaviour
         Vector3 curPos = GOTransform.position;
         Vector3 oldCamPos = ChildCamera.transform.position;
 
-        ChildCamera.transform.RotateAround(curPos, Vector3.right, step * yAxis);
-        ChildCamera.transform.RotateAround(curPos, Vector3.up, step * xAxis);
+        CamTransform.RotateAround(curPos, Vector3.right, step * yAxis);
+        CamTransform.RotateAround(curPos, Vector3.up, step * xAxis);
 
-        Vector3 newCamPos = ChildCamera.transform.position;
-        Vector3 origCamPos = GOTransform.transform.forward * -CameraDistance;
+        Vector3 newCamPos = CamTransform.position;
 
-        if (Physics.Raycast(ChildCamera.transform.position, -GOTransform.up, 1.0f))
+        if (Physics.Raycast(CamTransform.position, -GOTransform.up, 1.0f))
         {
             oldCamPos.x = newCamPos.x;
             oldCamPos.z = newCamPos.z;
-            ChildCamera.transform.position = oldCamPos;
-        }
-        else
-        {
-            if (Vector3.Angle(origCamPos, newCamPos) >= 90.0f)
-            {
-                // #TODO(Josh) Don't just stop input for x and y when limited by only one
-//                 if (Vector3.Dot(newCamPos.normalized, GOTransform.right) > 0)
-//                 {
-//                 }
-
-                ChildCamera.transform.position = oldCamPos;
-            }
+            CamTransform.position = oldCamPos;
         }
 
-        ChildCamera.transform.LookAt(curPos);
+        CamTransform.LookAt(curPos);
     }
     
     private void TryOrbitReturn(float step)
@@ -173,39 +176,92 @@ public class PlayerController : MonoBehaviour
         Vector3 cameraReturnPos = gameObject.transform.position + ((Quaternion.AngleAxis(CameraAngle, ChildCamera.transform.right) * gameObject.transform.forward) * -CameraDistance);
 
         Vector3 dist = cameraReturnPos - ChildCamera.transform.position;
-        if (dist.sqrMagnitude >= Vector3.kEpsilon * Vector3.kEpsilon)
+        if (dist.sqrMagnitude >= 100 * Vector3.kEpsilon)
         {
             ChildCamera.transform.position = Vector3.Slerp(ChildCamera.transform.position, cameraReturnPos, step);
             ChildCamera.transform.LookAt(GOTransform.position);
+        }
+        else
+        {
+            Debug.Log("Resetting camera reset");
+            bResetCamera = false;
+            CameraResetTimer.Stop();
+        }
+    }
+
+    private void CameraTrackPlayer(StepValues stepValues)
+    {
+        CamTransform.LookAt(GOTransform);
+
+        Vector3 between = GOTransform.position - CamTransform.position;
+        Vector3 desiredPos = GOTransform.position + between.normalized * -CameraDistance;
+        
+        if (!IsRightStickActive())
+        {
+            CamTransform.position = Vector3.Slerp(CamTransform.position, desiredPos, 0.0075f);
         }
     }
 
     private void DoKeyboardInput(StepValues stepValues)
     {
+        bool bDidMove = false;
         // Keyboard
         if (Input.GetKey(KeyCode.W))
         {
+            bDidMove = true;
+            if (OnMovementBegin != null)
+            {
+                OnMovementBegin.Invoke();
+            }
+
             StepMovement(0.0f, 1.0f, stepValues.MoveStep);
         }
         else if (Input.GetKey(KeyCode.S))
         {
+            bDidMove = true;
+            if (OnMovementBegin != null)
+            {
+                OnMovementBegin.Invoke();
+            }
+
             StepMovement(0.0f, -1.0f, stepValues.MoveStep);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
+            bDidMove = true;
+            if (OnMovementBegin != null)
+            {
+                OnMovementBegin.Invoke();
+            }
+
             StepMovement(1.0f, 0.0f, stepValues.MoveStep);
         }
         else if (Input.GetKey(KeyCode.A))
         {
+            bDidMove = true;
+            if (OnMovementBegin != null)
+            {
+                OnMovementBegin.Invoke();
+            }
+
             StepMovement(-1.0f, 0.0f, stepValues.MoveStep);
         }
         
         if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
         {
+            bDidMove = true;
             if (OnAttack != null)
             {
                 OnAttack.Invoke();
+            }
+        }
+
+        if (bDidMove)
+        {
+            if (OnMovementEnd != null)
+            {
+                OnMovementEnd.Invoke();
             }
         }
 
@@ -222,7 +278,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            TryOrbitReturn(stepValues.OrbitReturnStep);
+            //TryOrbitReturn(stepValues.OrbitReturnStep);
         }
     }
 
@@ -243,21 +299,43 @@ public class PlayerController : MonoBehaviour
          */
         if (IsLeftStickActive())
         {
-            StepMovement(xAxisLeft, yAxisLeft, stepValues.MoveStep);
-            
+            if (OnMovementBegin != null)
+            {
+                OnMovementBegin.Invoke();
+            }
 
-//             Vector3 steppedRotation = StepRotation(gameObject.transform.right, stepValues.RotStep * xAxisLeft);
-//             gameObject.transform.rotation = Quaternion.LookRotation(steppedRotation);
+            CameraResetTimer.Stop();
+            bResetCamera = false;
+
+            StepMovement(xAxisLeft, yAxisLeft, stepValues.MoveStep);
         }
-        
+        else if (WasLeftStickActive())
+        {
+            if (OnMovementEnd != null)
+            {
+                OnMovementEnd.Invoke();
+            }
+
+            CameraResetTimer.Start();
+        }
         // orbit
         if (IsRightStickActive())
         {
+            if (!WasRightStickActive())
+            {
+                CameraResetTimer.Stop();
+                bResetCamera = false;
+            }
+
             OrbitCam(xAxisRight, yAxisRight, stepValues.OrbitStep * ControllerSensitivity);
         }
         else
         {
-            TryOrbitReturn(stepValues.OrbitReturnStep);
+            if (WasRightStickActive())
+            {
+                CameraResetTimer.Start();
+            }
+            //TryOrbitReturn(stepValues.OrbitReturnStep);
         }
     }
 }
