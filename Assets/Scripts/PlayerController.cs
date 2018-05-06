@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     public delegate void MovementEndDelegate();
     
     public delegate void AbilityButtonDelegate();
+
+    public delegate void AttackSuccessDelegate();
     #endregion
 
     #region Public Events
@@ -35,6 +37,8 @@ public class PlayerController : MonoBehaviour
     
     public event AbilityButtonDelegate OnMainAbility;
     public event AbilityButtonDelegate OnSecondaryAbility;
+
+    public event AttackSuccessDelegate OnAttackSuccess;
     #endregion
 
     #region Public Movement Members
@@ -396,6 +400,14 @@ public class PlayerController : MonoBehaviour
             {
                 OnSecondaryAbility.Invoke();
             }
+        }
+    }
+
+    protected void AttackSuccess()
+    {
+        if (OnAttackSuccess != null)
+        {
+            OnAttackSuccess.Invoke();
         }
     }
 }

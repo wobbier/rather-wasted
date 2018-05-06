@@ -89,6 +89,8 @@ public class SharkController : PlayerController
             //other.gameObject.GetComponent<Animator>().Play("Death");
             Destroy(other.gameObject, 1);
             other.gameObject.SetActive(false);
+            
+            AttackSuccess();
         }
     }
 
