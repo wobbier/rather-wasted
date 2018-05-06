@@ -287,12 +287,19 @@ public class PlayerController : MonoBehaviour
             StepMovement(-1.0f, 0.0f, stepValues.MoveStep);
         }
         
-        if (Input.GetKey(KeyCode.Q) || Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            bDidMove = true;
-            if (OnAttack != null)
+            if (OnMainAbility != null)
             {
-                OnAttack.Invoke();
+                OnMainAbility.Invoke();
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (OnSecondaryAbility != null)
+            {
+                OnSecondaryAbility.Invoke();
             }
         }
 
