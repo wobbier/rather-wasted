@@ -107,6 +107,7 @@ public class SharkController : PlayerController
             other.GetComponent<CivillianAI>().Die();
             Destroy(other.gameObject, 2);
             //other.gameObject.SetActive(false);
+            AttackSuccess();
         }
     }
 
