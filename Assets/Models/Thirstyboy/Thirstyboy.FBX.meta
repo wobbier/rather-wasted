@@ -12,6 +12,10 @@ ModelImporter:
     100012: Thirstyboy_mouth
     100014: Thirstyboy_Left
     100016: Thirstyboybody_low
+    100018: Thirstyboy_spine01
+    100020: Thirstyboy_spine02
+    100022: Thirstyboy_spine03
+    100024: Thirstyboy_spine04
     400000: //RootNode
     400002: Thirstyboy_body
     400004: Thirstyboy_buttons
@@ -21,6 +25,10 @@ ModelImporter:
     400012: Thirstyboy_mouth
     400014: Thirstyboy_Left
     400016: Thirstyboybody_low
+    400018: Thirstyboy_spine01
+    400020: Thirstyboy_spine02
+    400022: Thirstyboy_spine03
+    400024: Thirstyboy_spine04
     2100000: No Name
     2100002: Thirstyboy
     2300000: Thirstyboy_body
@@ -52,6 +60,7 @@ ModelImporter:
     7400006: idle
     7400008: SlamRecovery
     9500000: //RootNode
+    13700000: Thirstyboybody_low
     2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
