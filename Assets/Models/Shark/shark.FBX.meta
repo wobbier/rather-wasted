@@ -249,6 +249,10 @@ ModelImporter:
     4300034: Box006
     4300036: Box007
     4300038: Thirstyboybody_low
+    7400000: run
+    7400002: RunRight
+    7400004: RunLeft
+    7400006: Bite
     9500000: //RootNode
     13700000: sharkbody_low
     13700002: sharkeyes_low
@@ -268,8 +272,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
-    rigImportErrors: "Avatar creation failed:\n\tCannot find root motion transform
-      'shark_spine01'.\n"
+    rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
@@ -326,7 +329,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    rootMotionBoneName: shark_spine01
+    rootMotionBoneName: Shark_Root
     rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
