@@ -31736,22 +31736,12 @@ Prefab:
       propertyPath: ChildCamera
       value: 
       objectReference: {fileID: 1416549003}
-    - target: {fileID: 114848532061705678, guid: 275e187fc7a503a42ae45032e50f37d4,
-        type: 2}
-      propertyPath: ChildCamera
-      value: 
-      objectReference: {fileID: 1416549003}
     - target: {fileID: 114178684045164982, guid: 275e187fc7a503a42ae45032e50f37d4,
         type: 2}
-      propertyPath: PlayerName
-      value: P2
+      propertyPath: MoveSpeed
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 4073968772979314, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -95.561005
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114848532061705678, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1110631282
@@ -35857,52 +35847,8 @@ Prefab:
       objectReference: {fileID: 1912801131}
     - target: {fileID: 114226531164755636, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
         type: 2}
-      propertyPath: PlayerName
-      value: P1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4463480518243686, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -35.255
-      objectReference: {fileID: 0}
-    - target: {fileID: 65905935198238630, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 1.4769588
-      objectReference: {fileID: 0}
-    - target: {fileID: 65905935198238630, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
-        type: 2}
-      propertyPath: m_Center.x
-      value: 0.54307824
-      objectReference: {fileID: 0}
-    - target: {fileID: 65905935198238630, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
-        type: 2}
-      propertyPath: m_Center.z
-      value: 0.045688726
-      objectReference: {fileID: 0}
-    - target: {fileID: 65905935198238630, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
-        type: 2}
-      propertyPath: m_Center.y
-      value: 0.2327294
-      objectReference: {fileID: 0}
-    - target: {fileID: 65905935198238630, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
-        type: 2}
-      propertyPath: m_Size.z
-      value: 1.2306213
-      objectReference: {fileID: 0}
-    - target: {fileID: 65905935198238630, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 1.1215184
-      objectReference: {fileID: 0}
-    - target: {fileID: 114226531164755636, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
-        type: 2}
       propertyPath: MoveSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114226531164755636, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b,
-        type: 2}
-      propertyPath: RotateSpeed
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5a2e6deea78c03e4ea8cc478dcdaf00b, type: 2}
@@ -41292,8 +41238,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayDuration:
-    minutes: 0
+    minutes: 1
     seconds: 30
+  CountDownDuration:
+    minutes: 0
+    seconds: 5
   CurrentState: 0
 --- !u!4 &1761994303
 Transform:
@@ -44279,7 +44228,7 @@ Prefab:
     - target: {fileID: 114083291333710972, guid: 9f6cb8c52d9f04a47be3126c0aa24a35,
         type: 2}
       propertyPath: SpawnRate
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f6cb8c52d9f04a47be3126c0aa24a35, type: 2}

@@ -125,7 +125,8 @@ public class GameState : MonoBehaviour
         CurrentState = EGameState.Playing;
 
         EndTime = DateTime.Now.AddMinutes(PlayDuration.minutes).AddSeconds(PlayDuration.seconds);
-
+        CountDownEndTime = DateTime.Now.AddMinutes(CountDownDuration.minutes).AddSeconds(CountDownDuration.seconds);
+        
         foreach (PlayerState state in PlayerStates)
         {
             state.Controller.ApplyMovement = true;

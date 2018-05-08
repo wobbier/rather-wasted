@@ -203,7 +203,6 @@ GameObject:
   - component: {fileID: 4469573078935598}
   - component: {fileID: 136055919233438002}
   - component: {fileID: 195076239219655974}
-  - component: {fileID: 114159507923652024}
   - component: {fileID: 114165488715740588}
   m_Layer: 0
   m_Name: Civilian
@@ -731,17 +730,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114159507923652024
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1405984999510414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3c5747b636dc814bbef9aa44db6358a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114165488715740588
 MonoBehaviour:
   m_ObjectHideFlags: 1
