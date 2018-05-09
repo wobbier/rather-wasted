@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
     private Timer CameraResetTimer;
 
     private bool bResetCamera = false;
+    private bool bIsMoving = false;
     #endregion
 
     #region Controller State
@@ -179,6 +180,24 @@ public class PlayerController : MonoBehaviour
         return MainAbilityButtonState[0];
     }
 
+    private void BeginMovement()
+    {
+        bIsMoving = true;
+        if (OnMovementBegin != null)
+        {
+            OnMovementBegin.Invoke();
+        }
+    }
+
+    private void FinishMovement()
+    {
+        bIsMoving = false;
+        if (OnMovementEnd != null)
+        {
+            OnMovementEnd.Invoke();
+        }
+    }
+
     private void StepMovement(float xAxisVal, float yAxisVal, float step)
     {
         if (ApplyMovement)
@@ -261,27 +280,27 @@ public class PlayerController : MonoBehaviour
 
     private void DoKeyboardInput(StepValues stepValues)
     {
-        bool bDidMove = false;
+        bool bDidMoveThisFrame = false;
         // Keyboard
         if (Input.GetKey(KeyCode.W))
         {
-            bDidMove = true;
+            bDidMoveThisFrame = true;
             StepMovement(0.0f, 1.0f, stepValues.MoveStep);
         }
         else if (Input.GetKey(KeyCode.S))
         {
-            bDidMove = true;
+            bDidMoveThisFrame = true;
             StepMovement(0.0f, -1.0f, stepValues.MoveStep);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            bDidMove = true;
+            bDidMoveThisFrame = true;
             StepMovement(1.0f, 0.0f, stepValues.MoveStep);
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            bDidMove = true;
+            bDidMoveThisFrame = true;
             StepMovement(-1.0f, 0.0f, stepValues.MoveStep);
         }
         
@@ -293,19 +312,13 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (bDidMove)
+        if (bDidMoveThisFrame && !bIsMoving)
         {
-            if (OnMovementBegin != null)
-            {
-                OnMovementBegin.Invoke();
-            }
+            BeginMovement();
         }
-        else
+        else if (!bDidMoveThisFrame && bIsMoving)
         {
-            if (OnMovementEnd != null)
-            {
-                OnMovementEnd.Invoke();
-            }
+            FinishMovement();
         }
 
         if (Input.GetKeyDown(KeyCode.E))
