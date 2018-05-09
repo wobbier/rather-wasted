@@ -266,42 +266,22 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             bDidMove = true;
-            if (OnMovementBegin != null)
-            {
-                OnMovementBegin.Invoke();
-            }
-
             StepMovement(0.0f, 1.0f, stepValues.MoveStep);
         }
         else if (Input.GetKey(KeyCode.S))
         {
             bDidMove = true;
-            if (OnMovementBegin != null)
-            {
-                OnMovementBegin.Invoke();
-            }
-
             StepMovement(0.0f, -1.0f, stepValues.MoveStep);
         }
 
         if (Input.GetKey(KeyCode.D))
         {
             bDidMove = true;
-            if (OnMovementBegin != null)
-            {
-                OnMovementBegin.Invoke();
-            }
-
             StepMovement(1.0f, 0.0f, stepValues.MoveStep);
         }
         else if (Input.GetKey(KeyCode.A))
         {
             bDidMove = true;
-            if (OnMovementBegin != null)
-            {
-                OnMovementBegin.Invoke();
-            }
-
             StepMovement(-1.0f, 0.0f, stepValues.MoveStep);
         }
         
@@ -313,19 +293,26 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (bDidMove)
+        {
+            if (OnMovementBegin != null)
+            {
+                OnMovementBegin.Invoke();
+            }
+        }
+        else
+        {
+            if (OnMovementEnd != null)
+            {
+                OnMovementEnd.Invoke();
+            }
+        }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             if (OnSecondaryAbility != null)
             {
                 OnSecondaryAbility.Invoke();
-            }
-        }
-
-        if (bDidMove)
-        {
-            if (OnMovementEnd != null)
-            {
-                OnMovementEnd.Invoke();
             }
         }
 
