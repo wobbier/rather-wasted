@@ -110,11 +110,11 @@ public class PlayerController : MonoBehaviour
     protected void Update()
     {
         StepValues stepValues;
-        stepValues.MoveStep              = MoveSpeed * Time.deltaTime;
-        stepValues.RotStep               = RotateSpeed * Time.deltaTime;
-        stepValues.OrbitStep             = OrbitSpeed * Time.deltaTime;
-        stepValues.OrbitReturnStep       = OrbitReturnSpeed * Time.deltaTime;
-        
+        stepValues.MoveStep = MoveSpeed * Time.deltaTime;
+        stepValues.RotStep = RotateSpeed * Time.deltaTime;
+        stepValues.OrbitStep = OrbitSpeed * Time.deltaTime;
+        stepValues.OrbitReturnStep = OrbitReturnSpeed * Time.deltaTime;
+
         LeftStickState[0] = LeftStickState[1];
         RightStickState[0] = RightStickState[1];
 
@@ -126,9 +126,15 @@ public class PlayerController : MonoBehaviour
 
         MainAbilityButtonState[1] = Input.GetButton(PlayerName + "_" + MainAbilityButtonName);
         SecondaryAbilityButtonState[1] = Input.GetButton(PlayerName + "_" + SecondaryAbilityButtonName);
-        
-        DoControllerInput(stepValues);
-        DoKeyboardInput(stepValues);
+
+        if (Input.anyKey && PlayerName == "P1")
+        {
+            DoKeyboardInput(stepValues);
+        }
+        else
+        {
+            DoControllerInput(stepValues);
+        }
 
         if (bResetCamera)
         {
