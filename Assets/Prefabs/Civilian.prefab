@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 4469573078935598}
   - component: {fileID: 136055919233438002}
   - component: {fileID: 195076239219655974}
-  - component: {fileID: 114165488715740588}
+  - component: {fileID: 114878593945465920}
   m_Layer: 0
   m_Name: Civilian
   m_TagString: Civilian
@@ -730,7 +730,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &114165488715740588
+--- !u!114 &114878593945465920
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -738,10 +738,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1405984999510414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01235a88b7112444c8eb7f7081de166f, type: 3}
+  m_Script: {fileID: 11500000, guid: 20def83baf9db1b4dbef158e179a1eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NavTimeout: 5
+  NavTimeout: 10
   SkinAnimator: {fileID: 95718290558529928}
 --- !u!136 &136055919233438002
 CapsuleCollider:

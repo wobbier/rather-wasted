@@ -52,5 +52,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   InitialAmountToSpawn: 20
-  Civilian: {fileID: 1405984999510414, guid: a02131c0122ee3a469877caf55480a80, type: 2}
-  SpawnRate: 5
+  Civilian: {fileID: 1405984999510414, guid: cc7b371b1d3857244a53e77975e10776, type: 2}
+  SpawnRate: 2
