@@ -14,13 +14,16 @@ public class PlayerController : MonoBehaviour
     public const string SecondaryAbilityButtonName = "SecondaryAbility";
     public const string LeftStick_PoliticalStance = "Radical";
     public const string RightStick_PoliticalStance = "Radical";
+
+
+    public const string PlayerOneName = "P1";
+    public const string PlayerTwoName = "P2";
     #endregion
 
     #region Public Members
     public Camera ChildCamera;
 
     public string PlayerName;
-    public int ControllerIdx;
     public bool ApplyMovement = true;
     #endregion
 
@@ -120,21 +123,14 @@ public class PlayerController : MonoBehaviour
 
         MainAbilityButtonState[0] = MainAbilityButtonState[1];
         SecondaryAbilityButtonState[0] = SecondaryAbilityButtonState[1];
-
+        
         LeftStickState[1] = Input.GetAxis(PlayerName + "_" + LeftStick_HorizontalAxisName) != 0 || Input.GetAxis(PlayerName + "_" + LeftStick_VerticalAxisName) != 0;
         RightStickState[1] = Input.GetAxis(PlayerName + "_" + RightStick_HorizontalAxisName) != 0 || Input.GetAxis(PlayerName + "_" + RightStick_VerticalAxisName) != 0;
-
+        
         MainAbilityButtonState[1] = Input.GetButton(PlayerName + "_" + MainAbilityButtonName);
         SecondaryAbilityButtonState[1] = Input.GetButton(PlayerName + "_" + SecondaryAbilityButtonName);
 
-        if (Input.anyKey && PlayerName == "P1")
-        {
-            DoKeyboardInput(stepValues);
-        }
-        else
-        {
-            DoControllerInput(stepValues);
-        }
+        HandleInputShunting(stepValues);
 
         if (bResetCamera)
         {
@@ -184,6 +180,34 @@ public class PlayerController : MonoBehaviour
     private bool WasSecondaryAbilityButtonActive()
     {
         return MainAbilityButtonState[0];
+    }
+
+    // Function to determine when to use keyboard or controller
+    private void HandleInputShunting(StepValues stepValues)
+    {
+        int numControllers = Input.GetJoystickNames().Length;
+        if (PlayerName == PlayerOneName)
+        {
+            if (numControllers == 2)
+            {
+                if (Input.anyKey)
+                {
+                    DoKeyboardInput(stepValues);
+                }
+                else
+                {
+                    DoControllerInput(stepValues);
+                }
+            }
+            else
+            {
+                DoKeyboardInput(stepValues);
+            }
+        }
+        else
+        {
+            DoControllerInput(stepValues);
+        }
     }
 
     private void BeginMovement()
