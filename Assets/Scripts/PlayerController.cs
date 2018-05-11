@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
         MainAbilityButtonState[1] = Input.GetButton(PlayerName + "_" + MainAbilityButtonName);
         SecondaryAbilityButtonState[1] = Input.GetButton(PlayerName + "_" + SecondaryAbilityButtonName);
 
-        HandleInputShunting(stepValues);
+        DoControllerInput(stepValues);
 
         if (bResetCamera)
         {
@@ -181,35 +181,7 @@ public class PlayerController : MonoBehaviour
     {
         return MainAbilityButtonState[0];
     }
-
-    // Function to determine when to use keyboard or controller
-    private void HandleInputShunting(StepValues stepValues)
-    {
-        int numControllers = Input.GetJoystickNames().Length;
-        if (PlayerName == PlayerOneName)
-        {
-            if (numControllers == 2)
-            {
-                if (Input.anyKey)
-                {
-                    DoKeyboardInput(stepValues);
-                }
-                else
-                {
-                    DoControllerInput(stepValues);
-                }
-            }
-            else
-            {
-                DoKeyboardInput(stepValues);
-            }
-        }
-        else
-        {
-            DoControllerInput(stepValues);
-        }
-    }
-
+    
     private void BeginMovement()
     {
         bIsMoving = true;
@@ -380,7 +352,7 @@ public class PlayerController : MonoBehaviour
         // Right stick
         float yAxisRight = Input.GetAxis(PlayerName + "_" + RightStick_VerticalAxisName);
         float xAxisRight = Input.GetAxis(PlayerName + "_" + RightStick_HorizontalAxisName);
-        
+
         Vector3 curPos = gameObject.transform.position;
 
         /*
