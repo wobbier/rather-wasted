@@ -741,7 +741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20def83baf9db1b4dbef158e179a1eb2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NavTimeout: 10
+  NavTimeout: 5
   SkinAnimator: {fileID: 95718290558529928}
 --- !u!136 &136055919233438002
 CapsuleCollider:

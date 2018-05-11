@@ -31701,15 +31701,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4073968772979314, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -10.58
+      value: -8.537407
       objectReference: {fileID: 0}
     - target: {fileID: 4073968772979314, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.38
+      value: 4.64
       objectReference: {fileID: 0}
     - target: {fileID: 4073968772979314, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 4.57
+      value: 1.0857972
       objectReference: {fileID: 0}
     - target: {fileID: 4073968772979314, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
       propertyPath: m_LocalRotation.x
@@ -31717,7 +31717,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4073968772979314, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
       propertyPath: m_LocalRotation.y
-      value: -0.74057335
+      value: -0.98606974
       objectReference: {fileID: 0}
     - target: {fileID: 4073968772979314, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
       propertyPath: m_LocalRotation.z
@@ -31725,7 +31725,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4073968772979314, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.67197555
+      value: 0.16633253
       objectReference: {fileID: 0}
     - target: {fileID: 4073968772979314, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
       propertyPath: m_RootOrder
@@ -31740,6 +31740,10 @@ Prefab:
         type: 2}
       propertyPath: MoveSpeed
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073968772979314, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -160.85101
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 275e187fc7a503a42ae45032e50f37d4, type: 2}
@@ -31795,7 +31799,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh15056
+  m_Name: pb_Mesh39442
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -36087,9 +36091,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: e61144ca058054a41967f117f0e116ff, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 30401b405d882f847af796d123c0e040, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.656
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -38451,7 +38455,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1416549000}
   m_LocalRotation: {x: -0.059570994, y: 0.7479212, z: -0.06775269, w: -0.6576282}
-  m_LocalPosition: {x: 8.619772, y: 4.893416, z: -5.091545}
+  m_LocalPosition: {x: 7.48, y: 11.18, z: -5.24}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

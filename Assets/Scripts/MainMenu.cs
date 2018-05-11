@@ -24,4 +24,9 @@ public class MainMenu : MonoBehaviour {
     {
         Application.Quit();
     }
+
+    public void OpenPortfolio(string url)
+    {
+        Application.OpenURL(url);
+    }
 }
